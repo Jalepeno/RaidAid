@@ -3,5 +3,6 @@ package dk.nicolajpedersen.raidaid.Data;
 /**
  * Created by Nicolaj on 13-03-2015.
  */
-public class Game {
+public enum Game {
+    COUNTERSTRIKE, DIABLO, DOTA2, LEAGUEOFLEGENDS, STARCRAFT, WORLDOFWARCRAFT
 }
