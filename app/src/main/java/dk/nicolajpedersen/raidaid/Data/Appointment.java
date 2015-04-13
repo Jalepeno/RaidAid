@@ -7,5 +7,6 @@ import java.util.Date;
  */
 public class Appointment {
     private Date date;
+    private Game game;
     private String headline,Description;
 }

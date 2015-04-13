@@ -3,6 +3,7 @@ package dk.nicolajpedersen.raidaid.Data;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import dk.nicolajpedersen.raidaid.Logic.HTTPLogic;
 
@@ -11,11 +12,12 @@ import dk.nicolajpedersen.raidaid.Logic.HTTPLogic;
  */
 public class Clan {
     private Game game;
-    private boolean isadmin;
-    private ArrayList<String> members;
+    private int myRank;
+    private ArrayList<User> members;
     private ArrayList<Appointment> appointments;
     private String clanName,welcomeMessage;
     private ArrayList<WallShout> shouts;
+    private UUID clanID;
 
     public Clan (JSONObject newClan){
 
@@ -40,7 +42,7 @@ public class Clan {
 
     public boolean leaveClan(){
         boolean isSuccess=false;
-        if(!isadmin){
+        if(myRank > 8){
             HTTPLogic httpLogic=new HTTPLogic();
         }
         return isSuccess;
@@ -51,7 +53,7 @@ public class Clan {
     // need admin rights check for this to happen
     public boolean kickMember(String username){
         boolean isSuccess=false;
-        if(isadmin){
+        if(myRank > 8){
             HTTPLogic httpLogic=new HTTPLogic();
         }
         return isSuccess;
@@ -60,7 +62,7 @@ public class Clan {
     // need admin rights check for this to happen
     public boolean makeNewAppointment() {
         boolean isSuccess=false;
-        if(isadmin){
+        if(myRank > 8){
             HTTPLogic httpLogic=new HTTPLogic();
         }
         return isSuccess;
@@ -69,7 +71,7 @@ public class Clan {
     // need admin rights check for this to happen
     public boolean setNewPassword(String newPassword){
         boolean isSuccess=false;
-        if(isadmin){
+        if(myRank > 8){
             HTTPLogic httpLogic=new HTTPLogic();
         }
         return isSuccess;
@@ -78,10 +80,35 @@ public class Clan {
     // need admin rights check for this to happen
     public boolean giveAdmin(String newAdminUser) {
         boolean isSuccess=false;
-        if(isadmin){
+        if(myRank > 8){
             HTTPLogic httpLogic=new HTTPLogic();
         }
         return isSuccess;
     }
 
+    public ArrayList<WallShout> getShouts() {
+        return shouts;
+    }
+
+    public String getWelcomeMessage() {
+        return welcomeMessage;
+    }
+
+
+    public UUID getClanID() {
+        return clanID;
+    }
+
+    public ArrayList<User> getMembers() {
+        return members;
+    }
+
+    public User findMember(String userName){
+        for(User member:members){
+            if(member.getUserName().equalsIgnoreCase(userName)){
+                return member;
+            }
+        }
+        return null;
+    }
 }

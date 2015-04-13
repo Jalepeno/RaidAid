@@ -1,5 +1,9 @@
 package dk.nicolajpedersen.raidaid.Logic;
 
+import android.text.Editable;
+
+import java.util.UUID;
+
 /**
  * Created by Nicolaj on 13-03-2015.
  */
@@ -14,4 +18,6 @@ public class HTTPLogic {
     }
 
 
+    public void sendShout(UUID clanID, Editable text) {
+    }
 }

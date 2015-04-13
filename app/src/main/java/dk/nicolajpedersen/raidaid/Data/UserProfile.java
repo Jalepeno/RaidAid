@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Nicolaj on 12-04-2015.
  */
-public class Profile {
+public class UserProfile{
     ArrayList<Clan> clans;
     String userName,password;
     ArrayList<Appointment> Calendar;

@@ -80,8 +80,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="5dp"
-        android:text="member1, member2, member3, member4, member6,
-        member7, member8, member9, member10, member11, "
+        android:text="member1, member2, member3, member4, member6,         member7, member8, member9, member10, member11, "
         />
 
 
