@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import dk.nicolajpedersen.raidaid.Data.Clan;
 import dk.nicolajpedersen.raidaid.Data.UserProfile;
 import dk.nicolajpedersen.raidaid.Data.WallShout;
+import dk.nicolajpedersen.raidaid.Logic.AppontmentArrayAdapter;
 import dk.nicolajpedersen.raidaid.Logic.HTTPLogic;
+import dk.nicolajpedersen.raidaid.Logic.ShoutArrayAdapter;
 import dk.nicolajpedersen.raidaid.R;
 
 /**
@@ -27,6 +29,7 @@ public class ClanPageActivity extends Activity implements View.OnClickListener{
     private Clan clan;
     private EditText etShout;
     private HTTPLogic httpLogic;
+    ShoutArrayAdapter sAA;
 
     public ClanPageActivity(Clan clan){
         this.clan = clan;
@@ -38,21 +41,24 @@ public class ClanPageActivity extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clan_page);
-        lvShout = (ListView) findViewById(R.id.listviewShoutbox);
-        btnInvite = (Button) findViewById(R.id.btnInvite);
-        btnShout = (Button) findViewById(R.id.btnShout);
-        btnShout.setOnClickListener(this);
-        btnInvite.setOnClickListener(this);
+
+        //setting up message of the day
         messageOfDay = (TextView) findViewById(R.id.tvMessageOfDay);
         messageOfDay.setText(clan.getWelcomeMessage());
 
+        //filling shout wall
+        lvShout = (ListView) findViewById(R.id.listviewShoutbox);
+        sAA = new ShoutArrayAdapter(this.getApplicationContext(),clan.getShouts());
+        lvShout.setAdapter(sAA);
+
+        // assigning buttons and textboxes.
+        btnInvite = (Button) findViewById(R.id.btnInvite);
+        btnShout = (Button) findViewById(R.id.btnShout);
+        etShout =(EditText) findViewById(R.id.etShoutText);
+        btnShout.setOnClickListener(this);
+        btnInvite.setOnClickListener(this);
     }
 
-    private void FillClanWall(){
-        for(WallShout ws :clan.getShouts()){
-
-        }
-    }
 
     @Override
     public void onClick(View v) {

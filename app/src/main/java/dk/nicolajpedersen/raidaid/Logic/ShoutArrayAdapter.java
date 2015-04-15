@@ -12,21 +12,20 @@ import java.util.ArrayList;
 
 import dk.nicolajpedersen.raidaid.Data.Clan;
 import dk.nicolajpedersen.raidaid.Data.User;
+import dk.nicolajpedersen.raidaid.Data.WallShout;
 import dk.nicolajpedersen.raidaid.R;
 
 /**
  * Created by Nicolaj on 13-04-2015.
  */
-public class ShoutArrayAdapter extends ArrayAdapter<String> {
+public class ShoutArrayAdapter extends ArrayAdapter<WallShout> {
     private final Context context;
-    private final String[] values;
-    private final Clan clan;
+    private ArrayList<WallShout> shouts;
 
-    public ShoutArrayAdapter(Context context, String[] values, Clan clan) {
-        super(context, R.layout.list_element_shout, values);
+    public ShoutArrayAdapter(Context context, ArrayList<WallShout> shouts) {
+        super(context, R.layout.list_element_shout, shouts);
         this.context = context;
-        this.values = values;
-        this.clan = clan;
+        this.shouts=shouts;
     }
 
     @Override
@@ -38,15 +37,16 @@ public class ShoutArrayAdapter extends ArrayAdapter<String> {
         TextView tvMessage = (TextView) rowView.findViewById(R.id.tvShoutMessage);
         TextView tvName = (TextView) rowView.findViewById(R.id.tvShoutName);
         ImageView imgRank = (ImageView) rowView.findViewById(R.id.imgShoutRank);
-        tvName.setText(values[position]);
 
-        // Change icon based on name
-        String s = values[position];
-        User thisGuy = clan.findMember(s);
+        WallShout thisShout = shouts.get(position);
+        User thisGuy = thisShout.getUser();
 
         if(thisGuy != null) {
 
-            System.out.println(thisGuy.getUserName());
+            tvName.setText(thisGuy.getUserName());
+            tvMessage.setText(thisShout.getMessage());
+
+            // Change icon based on rank
             switch (thisGuy.getMemberRank()){
                 case 1: imgRank.setImageResource(R.drawable.rank1);
                         break;
