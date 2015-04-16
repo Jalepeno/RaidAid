@@ -5,6 +5,7 @@ package dk.nicolajpedersen.raidaid.Data;
  */
 public class User {
     String userName;
+    int memberRank;
 
     public int getMemberRank() {
         return memberRank;
@@ -17,8 +18,6 @@ public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
-    int memberRank;
 
     public String getUserName() {
         return userName;

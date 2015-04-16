@@ -29,18 +29,16 @@ public class ClanPageActivity extends Activity implements View.OnClickListener{
     private Clan clan;
     private EditText etShout;
     private HTTPLogic httpLogic;
-    ShoutArrayAdapter sAA;
-
-    public ClanPageActivity(Clan clan){
-        this.clan = clan;
-        httpLogic = new HTTPLogic();
-    }
+    private ShoutArrayAdapter sAA;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clan_page);
+        httpLogic = new HTTPLogic();
+        clan = (Clan) getIntent().getSerializableExtra("MyClan");
+
 
         //setting up message of the day
         messageOfDay = (TextView) findViewById(R.id.tvMessageOfDay);
