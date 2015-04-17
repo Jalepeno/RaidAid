@@ -50,4 +50,7 @@ public class HTTPLogic {
     public int getClanInvites() {
         return 1;
     }
+
+    public int postSignup() { return 1;
+    }
 }

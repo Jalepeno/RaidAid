@@ -23,17 +23,21 @@ public class StartupActivity extends FragmentActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment_holder);
-        loginFragment = new LoginFragment();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.frameLayout1,loginFragment).commit();
+        setLoginFragment();
 
 
     }
 
-    public void setSignupFragment(){
+    public void setSignupFragment() {
         signupFragment = new SignupFragment();
         getSupportFragmentManager().beginTransaction().addToBackStack(null)
-                .add(R.id.frameLayout1,signupFragment).commit();
+                .add(R.id.frameLayout1, signupFragment).commit();
+    }
+
+    public void setLoginFragment(){
+        loginFragment = new LoginFragment();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.frameLayout1,loginFragment).commit();
     }
 
 }

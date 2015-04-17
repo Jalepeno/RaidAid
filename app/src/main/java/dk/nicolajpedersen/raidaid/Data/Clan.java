@@ -111,4 +111,20 @@ public class Clan {
         }
         return null;
     }
+
+    public String getClanName() {
+        return clanName;
+    }
+
+    public void setClanName(String clanName) {
+        this.clanName = clanName;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
 }

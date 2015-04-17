@@ -22,9 +22,16 @@ public class Guild extends Clan {
         return isSuccess;
     }
 
+    public Faction getFaction() {
+        return faction;
+    }
 
-    private enum Faction{
-        ALLIANCE,HORDE
+    public void setFaction(Faction faction) {
+        this.faction = faction;
+    }
+
+    public enum Faction{
+        ALLIANCE, Faction, HORDE
     }
 
 }
