@@ -6,9 +6,9 @@ import java.util.ArrayList;
  * Created by Nicolaj on 15-04-2015.
  */
 public class Profile {
-    private static ArrayList<Clan> myClans;
-    private static ArrayList<Appointment> myAppointments;
-    private static String username, password;
+    public static ArrayList<Clan> myClans;
+    public static ArrayList<Appointment> myAppointments;
+    public static String username, password;
 
     public ArrayList<Clan> getMyClans() {
         return myClans;

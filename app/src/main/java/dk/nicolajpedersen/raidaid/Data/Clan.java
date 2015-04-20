@@ -22,6 +22,18 @@ public class Clan {
     public Clan (JSONObject newClan){
 
     }
+
+    public Clan(Game game, int myRank, ArrayList<User> members,String clanName,
+                String welcomeMessage, ArrayList<WallShout> shouts, UUID clanID) {
+        this.game = game;
+        this.myRank = myRank;
+        this.members = members;
+        this.clanName = clanName;
+        this.welcomeMessage = welcomeMessage;
+        this.shouts = shouts;
+        this.clanID = clanID;
+    }
+
     public boolean createNewClan(Game game,String newClanName, String setPassword){
         HTTPLogic httpLogic=new HTTPLogic();
         boolean isSuccess=false;

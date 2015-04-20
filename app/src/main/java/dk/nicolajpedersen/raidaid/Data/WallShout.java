@@ -7,9 +7,6 @@ public class WallShout {
     String message;
     User user;
 
-    public WallShout(){
-
-    }
     public WallShout(String message,User user){
         this.message = message;
         this.user = user;

@@ -1,6 +1,7 @@
 package dk.nicolajpedersen.raidaid.Logic;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,26 +46,26 @@ public class AppontmentArrayAdapter extends ArrayAdapter<Appointment> {
         LinearLayout background = (LinearLayout) rowView.findViewById(R.id.outerLayout);
         switch (thisAppointGame){
             case COUNTERSTRIKE:
-                background.setBackground(); //R.drawable. - some couterstringe image
+                background.setBackgroundColor(Color.GRAY); //R.drawable. - some couterstringe image
                 break;
             case DIABLO:
-                background.setBackground(); //R.drawable. - some diablo image
+                background.setBackgroundColor(Color.DKGRAY); //R.drawable. - some diablo image
                 break;
             case DOTA2:
-                background.setBackground(); //R.drawable. - some dota2 image
+                background.setBackgroundColor(Color.CYAN); //R.drawable. - some dota2 image
                 break;
             case LEAGUEOFLEGENDS:
-                background.setBackground(); //R.drawable. - some lol image
+                background.setBackgroundColor(Color.GREEN); //R.drawable. - some lol image
                 break;
             case STARCRAFT:
-                background.setBackground(); //R.drawable. - some starcraft image
+                background.setBackgroundColor(Color.YELLOW); //R.drawable. - some starcraft image
                 break;
             case WORLDOFWARCRAFT:
                 Guild faction = (Guild) thisAppointment.getClan();
                 if(faction.getFaction() == Guild.Faction.ALLIANCE) {
-                    background.setBackground(); //R.drawable. - some wow Alliance image
+                    background.setBackgroundColor(Color.BLUE); //R.drawable. - some wow Alliance image
                 }else{
-                    background.setBackground(); //R.drawable. - some wow Horde image
+                    background.setBackgroundColor(Color.RED); //R.drawable. - some wow Horde image
                 }
                 break;
             default:

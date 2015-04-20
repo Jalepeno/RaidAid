@@ -7,6 +7,11 @@ public class User {
     String userName;
     int memberRank;
 
+    public User(String userName, int memberRank) {
+        this.userName = userName;
+        this.memberRank = memberRank;
+    }
+
     public int getMemberRank() {
         return memberRank;
     }
