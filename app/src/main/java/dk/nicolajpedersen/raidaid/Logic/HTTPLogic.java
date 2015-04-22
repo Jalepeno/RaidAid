@@ -61,7 +61,8 @@ public class HTTPLogic {
         return 1;
     }
 
-    public int postSignup() { return 1;
+    public int postSignup() {
+        return 1;
     }
 
     public void getDummyClans() {
