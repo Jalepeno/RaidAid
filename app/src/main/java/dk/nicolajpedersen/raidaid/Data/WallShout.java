@@ -5,11 +5,11 @@ package dk.nicolajpedersen.raidaid.Data;
  */
 public class WallShout {
     String message;
-    User user;
+    Member member;
 
-    public WallShout(String message,User user){
+    public WallShout(String message,Member member){
         this.message = message;
-        this.user = user;
+        this.member = member;
     }
 
     public String getMessage() {
@@ -20,11 +20,11 @@ public class WallShout {
         this.message = message;
     }
 
-    public User getUser() {
-        return user;
+    public Member getMember() {
+        return member;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setMember(Member member) {
+        this.member = member;
     }
 }

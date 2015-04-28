@@ -1,5 +1,6 @@
 package dk.nicolajpedersen.raidaid.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import dk.nicolajpedersen.raidaid.Activities.PageViewActivity;
 import dk.nicolajpedersen.raidaid.Activities.StartupActivity;
+import dk.nicolajpedersen.raidaid.Data.Profile;
 import dk.nicolajpedersen.raidaid.Logic.HTTPLogic;
 import dk.nicolajpedersen.raidaid.R;
 
@@ -38,7 +40,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         signup.setOnClickListener(this);
         login.setOnClickListener(this);
 
-        sharedPreferences = getActivity().getSharedPreferences("RaidAid", Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences("RaidAidPrefs", Context.MODE_PRIVATE);
 
         return loginView;
     }
@@ -47,8 +49,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         if(v == login){
             //login session
+
             HTTPLogic httpLogic = new HTTPLogic();
-            int didStuffHappen = httpLogic.getProfile(username.getText().toString(),password.getText().toString());
+            int didStuffHappen = httpLogic.getProfileByLogin(username.getText().toString(), password.getText().toString(), getActivity().getApplicationContext());
 
 
             // if login successful

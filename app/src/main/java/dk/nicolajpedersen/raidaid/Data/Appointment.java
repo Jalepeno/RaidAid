@@ -3,13 +3,14 @@ package dk.nicolajpedersen.raidaid.Data;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.UUID;
 
 /**
  * Created by Nicolaj on 13-03-2015.
  */
-public class Appointment {
+public class Appointment implements Comparator<Appointment>{
     private Date date;
     private Game game;
     private Clan clan;
@@ -67,5 +68,10 @@ public class Appointment {
 
     public void setDescription(String description) {
         Description = description;
+    }
+
+    @Override
+    public int compare(Appointment lhs, Appointment rhs) {
+        return lhs.getDate().compareTo(rhs.getDate());
     }
 }

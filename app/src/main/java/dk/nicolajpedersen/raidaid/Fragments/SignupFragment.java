@@ -1,5 +1,6 @@
 package dk.nicolajpedersen.raidaid.Fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,10 +40,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener{
         seeTerms.setOnClickListener(this);
         btnSign.setOnClickListener(this);
 
-
-
-
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return signupView;
     }
 
     @Override
@@ -75,8 +74,28 @@ public class SignupFragment extends Fragment implements View.OnClickListener{
                 toast.show();
             }
         }
-        if(v == terms){
+        if(v == seeTerms){
             // something about a dialog with terms here!
+
+            // custom dialog
+            final Dialog dialog = new Dialog(getActivity());
+
+            dialog.setContentView(R.layout.dialog_terms);
+            dialog.setTitle("Terms");
+
+            // set the custom dialog components - text, image and button
+            TextView text = (TextView) dialog.findViewById(R.id.tvTermsDescription);
+
+            Button dialogButton = (Button) dialog.findViewById(R.id.btnTermsOk);
+            // if button is clicked, close the custom dialog
+            dialogButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
         }
 
     }

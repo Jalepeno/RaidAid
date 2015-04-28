@@ -13,7 +13,7 @@ import dk.nicolajpedersen.raidaid.Logic.HTTPLogic;
 public class Clan {
     private Game game;
     private int myRank;
-    private ArrayList<User> members;
+    private ArrayList<Member> members;
     private ArrayList<Appointment> appointments;
     private String clanName,welcomeMessage;
     private ArrayList<WallShout> shouts;
@@ -23,7 +23,7 @@ public class Clan {
 
     }
 
-    public Clan(Game game, int myRank, ArrayList<User> members,String clanName,
+    public Clan(Game game, int myRank, ArrayList<Member> members,String clanName,
                 String welcomeMessage, ArrayList<WallShout> shouts, UUID clanID) {
         this.game = game;
         this.myRank = myRank;
@@ -111,7 +111,7 @@ public class Clan {
         return clanID;
     }
 
-    public ArrayList<User> getMembers() {
+    public ArrayList<Member> getMembers() {
         return members;
     }
 

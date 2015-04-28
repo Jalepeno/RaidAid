@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import dk.nicolajpedersen.raidaid.Data.Clan;
+import dk.nicolajpedersen.raidaid.Data.Member;
 import dk.nicolajpedersen.raidaid.Data.User;
 import dk.nicolajpedersen.raidaid.Data.WallShout;
 import dk.nicolajpedersen.raidaid.R;
@@ -39,7 +40,7 @@ public class ShoutArrayAdapter extends ArrayAdapter<WallShout> {
         ImageView imgRank = (ImageView) rowView.findViewById(R.id.imgShoutRank);
 
         WallShout thisShout = shouts.get(position);
-        User thisGuy = thisShout.getUser();
+        Member thisGuy = thisShout.getMember();
 
         if(thisGuy != null) {
 
@@ -47,7 +48,7 @@ public class ShoutArrayAdapter extends ArrayAdapter<WallShout> {
             tvMessage.setText(thisShout.getMessage());
 
             // Change icon based on rank
-            switch (thisGuy.getMemberRank()){
+            switch (thisGuy.getRank()){
                 case 1: imgRank.setImageResource(R.drawable.rank1);
                         break;
                 case 2: imgRank.setImageResource(R.drawable.rank2);

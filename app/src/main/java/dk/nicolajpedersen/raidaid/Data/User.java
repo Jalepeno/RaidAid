@@ -1,23 +1,30 @@
 package dk.nicolajpedersen.raidaid.Data;
 
+import org.json.JSONObject;
+
 /**
  * Created by Nicolaj on 13-04-2015.
  */
 public class User {
     String userName;
-    int memberRank;
+    String userID;
 
-    public User(String userName, int memberRank) {
+
+    public User(String userName, String userID) {
         this.userName = userName;
-        this.memberRank = memberRank;
+        this.userID = userID;
+
     }
 
-    public int getMemberRank() {
-        return memberRank;
+    public User(JSONObject jsonObject) {
     }
 
-    public void setMemberRank(int memberRank) {
-        this.memberRank = memberRank;
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public void setUserName(String userName) {

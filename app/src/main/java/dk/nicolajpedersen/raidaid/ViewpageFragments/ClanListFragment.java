@@ -40,8 +40,6 @@ public class ClanListFragment extends Fragment {
         View view = inflater.inflate(R.layout.list_element_clan, container, false);
 
 
-
-
         return view;
     }
 }

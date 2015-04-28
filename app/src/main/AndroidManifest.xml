@@ -20,4 +20,6 @@
         <activity android:name=".Activities.ClanPageActivity" android:label="RaidAid"></activity>
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

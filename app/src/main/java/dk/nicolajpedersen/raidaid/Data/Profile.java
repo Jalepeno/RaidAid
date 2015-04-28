@@ -1,6 +1,9 @@
 package dk.nicolajpedersen.raidaid.Data;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by Nicolaj on 15-04-2015.
@@ -8,7 +11,18 @@ import java.util.ArrayList;
 public class Profile {
     public static ArrayList<Clan> myClans;
     public static ArrayList<Appointment> myAppointments;
+    public static ArrayList<User> myFriends;
     public static String username, password;
+    public static String userID;
+
+    public Profile(JSONObject loginObject) {
+        myAppointments = new ArrayList<Appointment>();
+        myClans = new ArrayList<Clan>();
+        myFriends = new ArrayList<User>();
+        username = "";
+        password = "";
+        userID = UUID.randomUUID().toString();
+    }
 
     public ArrayList<Clan> getMyClans() {
         return myClans;
@@ -41,4 +55,5 @@ public class Profile {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

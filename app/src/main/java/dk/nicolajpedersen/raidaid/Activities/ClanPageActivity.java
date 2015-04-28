@@ -1,6 +1,5 @@
 package dk.nicolajpedersen.raidaid.Activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -11,13 +10,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.apache.http.protocol.HTTP;
-
-import java.util.ArrayList;
 import dk.nicolajpedersen.raidaid.Data.Clan;
-import dk.nicolajpedersen.raidaid.Data.UserProfile;
-import dk.nicolajpedersen.raidaid.Data.WallShout;
-import dk.nicolajpedersen.raidaid.Logic.AppontmentArrayAdapter;
 import dk.nicolajpedersen.raidaid.Logic.HTTPLogic;
 import dk.nicolajpedersen.raidaid.Logic.ShoutArrayAdapter;
 import dk.nicolajpedersen.raidaid.R;

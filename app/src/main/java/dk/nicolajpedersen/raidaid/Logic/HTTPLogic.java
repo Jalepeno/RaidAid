@@ -1,9 +1,24 @@
 package dk.nicolajpedersen.raidaid.Logic;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.text.Editable;
+import android.util.Base64;
+import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.protocol.HTTP;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -25,26 +40,171 @@ import dk.nicolajpedersen.raidaid.Data.WallShout;
 public class HTTPLogic {
 
 
+
     public HTTPLogic(){
-    }
-
-    public int getProfile(String username,String password){
-        getClanList();
-        getFriendList();
-        getFriendRequests();
-        getClanInvites();
-        return 1;
-    }
-    public int getClan(){
-        return 1;
-    }
-
-    public int getClanList() {
-        getDummyClans();
-        return 1;
 
     }
 
+    public int getProfileByLogin(final String username, final String password, final Context context){
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        params.put("Usename", username);
+        params.put("Password", password);
+        final int[] isSuccess = new int[1];
+
+        client.addHeader("Content-Type","application/json");
+
+        try{
+            JSONObject loginModel = new JSONObject();
+
+            loginModel.put("Username",username);
+            loginModel.put("Password",password);
+
+            StringEntity entity = new StringEntity(loginModel.toString());
+            entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+            final ProgressDialog dialog = new ProgressDialog(context);
+            dialog.setMessage("Logging you in..");
+            dialog.show();
+
+            client.post(context,getLoginUrl(),entity,"application/json",new JsonHttpResponseHandler(){
+
+                // When the response returned by REST has Http response code '200'
+                @Override
+                public void onSuccess(int i, Header[] headers, JSONObject response) {
+                    Profile profile = new Profile(response);
+                    if(profile.userID.equals(UUID.fromString("00000000-0000-0000-0000-000000000000"))){
+                        // login failed
+                        CharSequence text = "Login failed";
+                        Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+                        toast.show();
+                        isSuccess[0] = 0;
+                    }else{
+                        // login success
+                        //upon success save credentials in sharedPreferences.
+                        SharedPreferences.Editor editor = context.getSharedPreferences("RaidAidPrefs",Context.MODE_PRIVATE).edit();
+                        editor.putString("Username", username);
+                        editor.putString("UserID", profile.userID);
+                        editor.putString("UserPassword", password);
+                        editor.commit();
+                        isSuccess[0] = 1;
+
+                        // start getting extra information once login has been confirmed.
+                        getClansByLogin(context, username, password);
+                        getFriendsByLogin(context, username, password);
+
+                    }
+                    dialog.dismiss();
+                }
+                @Override
+                public void onFailure(int statusCode,
+                                      Header[] headers,
+                                      Throwable throwable,
+                                      JSONObject errorResponse){
+
+//                    login failed
+                    isSuccess[0] = 0;
+                    throwable.printStackTrace();
+                    dialog.dismiss();
+                }
+
+            });
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            isSuccess[0] = 0;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            isSuccess[0] = 0;
+        }
+
+    return isSuccess[0];
+    }
+
+
+    public void getClansByLogin(Context context, String username,String password){
+        AsyncHttpClient client = getLogInClient(username,password);
+
+        try{
+            client.get(context, getClanUrl(), new JsonHttpResponseHandler() {
+                // When the response returned by REST has Http response code '200'
+                @Override
+                public void onSuccess(int i, Header[] headers, JSONArray response) {
+
+                    for (int c = 0; c < response.length(); c++) {
+                        try {
+                            Profile.myClans.add(new Clan((JSONObject) response.get(c)));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    for (Clan c : Profile.myClans) {
+                        System.out.println(c.getClanName());
+                    }
+
+                }
+
+                @Override
+                public void onFailure(int statusCode,
+                                      Header[] headers,
+                                      Throwable throwable,
+                                      JSONObject errorResponse) {
+//                    login failed
+                    throwable.printStackTrace();
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public  void getFriendsByLogin(Context context, String username, String password){
+        AsyncHttpClient client  = getLogInClient(username,password);
+
+        try{
+            client.get(context,getProfileFriendsUrl(),new JsonHttpResponseHandler(){
+                // When the response returned by REST has Http response code '200'
+                @Override
+                public void onSuccess(int i, Header[] headers, JSONArray response) {
+                    Profile.myFriends.clear();
+                    for (int u = 0; u < response.length(); u++) {
+                        try {
+
+                            Profile.myFriends.add(new User((JSONObject) response.get(u)));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    for (User u : Profile.myFriends) {
+                        System.out.println(u.getUserName());
+                    }
+
+                }
+
+                @Override
+                public void onFailure(int statusCode,
+                                      Header[] headers,
+                                      Throwable throwable,
+                                      JSONObject errorResponse) {
+//                    login failed
+                    throwable.printStackTrace();
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    private AsyncHttpClient getLogInClient(String username,String password){
+        AsyncHttpClient client  = new AsyncHttpClient();
+        String auth = username+":"+password;
+        String encodedAuth = Base64.encodeToString(auth.getBytes(),Base64.DEFAULT);
+
+        client.addHeader("Authorization","Basic "+encodedAuth);
+        client.addHeader("Content-Type", "application/json");
+        return client;
+    }
 
     public void sendShout(UUID clanID, String text) {
     }
@@ -64,7 +224,17 @@ public class HTTPLogic {
     public int postSignup() {
         return 1;
     }
+    private String getLoginUrl() {
+        return "http://nicolajpedersen.dk/api/persons/login";
+    }
+    private String getClanUrl() {
+        return "http://nicolajpedersen.dk/api/clans";
+    }
+    private String getProfileFriendsUrl() {
+        return "http://nicolajpedersen.dk/api/persons";
+    }
 
+    /*
     public void getDummyClans() {
         if(Profile.myClans.size() == 0){
             ArrayList<User> membersClan1 = new ArrayList<User>();
@@ -136,4 +306,7 @@ public class HTTPLogic {
             Profile.myClans.add(clan3);
         }
     }
+    */
+
 }
+
