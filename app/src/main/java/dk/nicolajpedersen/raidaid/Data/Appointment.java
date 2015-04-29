@@ -16,7 +16,7 @@ public class Appointment implements Comparator<Appointment>{
     private Clan clan;
     private ArrayList<User> readyppl;
     private String headline,Description;
-    private UUID appointmentID;
+
 
     public Appointment (JSONObject jsonAppoint){
 

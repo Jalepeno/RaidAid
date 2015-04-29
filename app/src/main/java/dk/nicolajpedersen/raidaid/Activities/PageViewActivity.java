@@ -27,8 +27,6 @@ public class PageViewActivity extends FragmentActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewpager);
         listPaging();
-
-
     }
 
     private void listPaging(){

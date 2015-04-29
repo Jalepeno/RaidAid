@@ -1,5 +1,6 @@
 package dk.nicolajpedersen.raidaid.Data;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -17,6 +18,13 @@ public class User {
     }
 
     public User(JSONObject jsonObject) {
+        try {
+            userName = jsonObject.getString("Username");
+            userID = jsonObject.getString("UserID");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public String getUserID() {

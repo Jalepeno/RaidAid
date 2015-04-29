@@ -62,13 +62,11 @@ public class ClanArrayAdapter extends ArrayAdapter<Clan> {
             case STARCRAFT:
                 background.setBackgroundColor(Color.YELLOW); //R.drawable. - some starcraft image
                 break;
-            case WORLDOFWARCRAFT:
-                Guild faction = (Guild) thisClan;
-                if(faction.getFaction() == Guild.Faction.ALLIANCE) {
-                    background.setBackgroundColor(Color.BLUE); //R.drawable. - some wow Alliance image
-                }else{
-                    background.setBackgroundColor(Color.RED); //R.drawable. - some wow Horde image
-                }
+            case WORLDOFWARCRAFTALLIANCE:
+                background.setBackgroundColor(Color.BLUE); //R.drawable. - some wow alliance image
+                break;
+            case WORLDOFWARCRAFTHORDE:
+                    background.setBackgroundColor(Color.RED); //R.drawable. - some wow horde image
                 break;
             default:
                 break;

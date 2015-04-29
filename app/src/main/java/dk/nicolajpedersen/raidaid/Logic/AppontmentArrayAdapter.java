@@ -60,13 +60,11 @@ public class AppontmentArrayAdapter extends ArrayAdapter<Appointment> {
             case STARCRAFT:
                 background.setBackgroundColor(Color.YELLOW); //R.drawable. - some starcraft image
                 break;
-            case WORLDOFWARCRAFT:
-                Guild faction = (Guild) thisAppointment.getClan();
-                if(faction.getFaction() == Guild.Faction.ALLIANCE) {
-                    background.setBackgroundColor(Color.BLUE); //R.drawable. - some wow Alliance image
-                }else{
-                    background.setBackgroundColor(Color.RED); //R.drawable. - some wow Horde image
-                }
+            case WORLDOFWARCRAFTALLIANCE:
+                background.setBackgroundColor(Color.BLUE); //R.drawable. - some wow alliance image
+                break;
+            case WORLDOFWARCRAFTHORDE:
+                background.setBackgroundColor(Color.RED); //R.drawable. - some wow horde image
                 break;
             default:
                 break;
