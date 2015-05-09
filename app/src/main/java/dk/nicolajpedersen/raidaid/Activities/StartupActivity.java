@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.splunk.mint.Mint;
+
 import dk.nicolajpedersen.raidaid.Fragments.LoginFragment;
 import dk.nicolajpedersen.raidaid.Fragments.SignupFragment;
 import dk.nicolajpedersen.raidaid.Logic.HTTPLogic;
@@ -24,6 +26,8 @@ public class StartupActivity extends FragmentActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment_holder);
+
+        Mint.initAndStartSession(StartupActivity.this, "f309539b");
 
         if(savedInstanceState == null){
             setLoginFragment();

@@ -1,42 +1,43 @@
 package dk.nicolajpedersen.raidaid.Data;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 
 /**
  * Created by Nicolaj on 13-03-2015.
  */
 public class Appointment implements Comparator<Appointment>{
-    private Date date;
-    private Game game;
+    private GregorianCalendar date;
     private Clan clan;
-    private ArrayList<User> readyppl;
-    private String headline,Description;
+ //   private ArrayList<User> readyppl;
+    private String headline, description;
 
 
     public Appointment (JSONObject jsonAppoint){
+        try {
+            date.setTimeInMillis(jsonAppoint.getLong("Date"));
+            clan = Profile.getClanByID(UUID.fromString(jsonAppoint.getString("ClanID")));
+            headline = jsonAppoint.getString("Headline");
+            description = jsonAppoint.getString("Descripstion");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    public Date getDate() {
+    public GregorianCalendar getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(GregorianCalendar date) {
         this.date = date;
     }
 
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
 
     public Clan getClan() {
         return clan;
@@ -46,13 +47,14 @@ public class Appointment implements Comparator<Appointment>{
         this.clan = clan;
     }
 
-    public ArrayList<User> getReadyppl() {
+/*    public ArrayList<User> getReadyppl() {
         return readyppl;
     }
 
     public void setReadyppl(ArrayList<User> readyppl) {
         this.readyppl = readyppl;
     }
+*/
 
     public String getHeadline() {
         return headline;
@@ -63,11 +65,11 @@ public class Appointment implements Comparator<Appointment>{
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     @Override

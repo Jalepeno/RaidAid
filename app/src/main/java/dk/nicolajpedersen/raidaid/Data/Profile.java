@@ -16,12 +16,8 @@ public class Profile {
     public static String userID;
 
     public Profile(JSONObject loginObject) {
-        myAppointments = new ArrayList<Appointment>();
-        myClans = new ArrayList<Clan>();
-        myFriends = new ArrayList<User>();
-        username = "";
-        password = "";
-        userID = UUID.randomUUID().toString();
+
+
     }
 
     public ArrayList<Clan> getMyClans() {
@@ -54,6 +50,17 @@ public class Profile {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public static Clan getClanByID(UUID clanId){
+        if(clanId != null){
+            for(Clan c : myClans){
+                if(clanId == c.getClanID()){
+                    return c;
+                }
+            }
+        }
+        return null;
     }
 
 }

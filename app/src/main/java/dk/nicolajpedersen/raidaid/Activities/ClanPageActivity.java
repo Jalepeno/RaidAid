@@ -33,24 +33,31 @@ public class ClanPageActivity extends ActionBarActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clan_page);
         httpLogic = new HTTPLogic();
-        clan = (Clan) getIntent().getSerializableExtra("MyClan");
 
 
-        //setting up message of the day
-        messageOfDay = (TextView) findViewById(R.id.tvMessageOfDay);
-        messageOfDay.setText(clan.getWelcomeMessage());
+        try{
+            clan = (Clan) getIntent().getSerializableExtra("MyClan");
 
-        //filling shout wall
-        lvShout = (ListView) findViewById(R.id.listviewShoutbox);
-        sAA = new ShoutArrayAdapter(this.getApplicationContext(),clan.getShouts());
-        lvShout.setAdapter(sAA);
+            //setting up message of the day
+            messageOfDay = (TextView) findViewById(R.id.tvMessageOfDay);
+            messageOfDay.setText(clan.getWelcomeMessage());
 
-        // assigning buttons and textboxes.
-        btnInvite = (Button) findViewById(R.id.btnInvite);
-        btnShout = (Button) findViewById(R.id.btnShout);
-        etShout =(EditText) findViewById(R.id.etShoutText);
-        btnShout.setOnClickListener(this);
-        btnInvite.setOnClickListener(this);
+            //filling shout wall
+            lvShout = (ListView) findViewById(R.id.listviewShoutbox);
+            sAA = new ShoutArrayAdapter(this.getApplicationContext(),clan.getShouts());
+            lvShout.setAdapter(sAA);
+
+            // assigning buttons and textboxes.
+            btnInvite = (Button) findViewById(R.id.btnInvite);
+            btnShout = (Button) findViewById(R.id.btnShout);
+            etShout =(EditText) findViewById(R.id.etShoutText);
+            btnShout.setOnClickListener(this);
+            btnInvite.setOnClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

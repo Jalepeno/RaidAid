@@ -66,22 +66,22 @@ public class HTTPLogic {
             dialog.setMessage("Logging you in..");
             dialog.show();
 
-            client.post(context,getLoginUrl(),entity,"application/json",new JsonHttpResponseHandler(){
+            client.post(context, getLoginUrl(), entity, "application/json", new JsonHttpResponseHandler() {
 
                 // When the response returned by REST has Http response code '200'
                 @Override
                 public void onSuccess(int i, Header[] headers, JSONObject response) {
                     Profile profile = new Profile(response);
-                    if(profile.userID.equals(UUID.fromString("00000000-0000-0000-0000-000000000000"))){
+                    if (profile.userID.equals(UUID.fromString("00000000-0000-0000-0000-000000000000"))) {
                         // login failed
                         CharSequence text = "Login failed";
                         Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
                         toast.show();
                         isSuccess[0] = 0;
-                    }else{
+                    } else {
                         // login success
                         //upon success save credentials in sharedPreferences.
-                        SharedPreferences.Editor editor = context.getSharedPreferences("RaidAidPrefs",Context.MODE_PRIVATE).edit();
+                        SharedPreferences.Editor editor = context.getSharedPreferences("RaidAidPrefs", Context.MODE_PRIVATE).edit();
                         editor.putString("Username", username);
                         editor.putString("UserID", profile.userID);
                         editor.putString("UserPassword", password);
@@ -95,11 +95,12 @@ public class HTTPLogic {
                     }
                     dialog.dismiss();
                 }
+
                 @Override
                 public void onFailure(int statusCode,
                                       Header[] headers,
                                       Throwable throwable,
-                                      JSONObject errorResponse){
+                                      JSONObject errorResponse) {
 
 //                    login failed
                     isSuccess[0] = 0;
@@ -233,6 +234,102 @@ public class HTTPLogic {
     private String getProfileFriendsUrl() {
         return "http://nicolajpedersen.dk/api/persons";
     }
+    private String getEventUrl(){return "http://nicolajpedersen.dk/events";}
+
+
+    public void getDummyProfile(String username, String password, Context context){
+        Profile.username = username;
+        Profile.password = password;
+        Profile.userID = UUID.randomUUID().toString();
+        SharedPreferences.Editor editor = context.getSharedPreferences("RaidAidPrefs",Context.MODE_PRIVATE).edit();
+        editor.putString("Username", username);
+        editor.putString("UserID", Profile.userID);
+        editor.putString("UserPassword", password);
+        editor.commit();
+
+
+        getDummyClans();
+        getDummyFriends();
+        getDummyAppointments();
+    }
+
+    private void getDummyAppointments() {
+
+
+    }
+
+    private void getDummyFriends() {
+        String[] friends = new String[]{
+                "Bly","Happy","KingKong","Arthur","Prebs","soul","RiSK","MaFia","WhiteRa",
+                "Demuslim","MarieKingPrime","Bunny","MMA","herO","Dark","Maru","Zest","Life",
+                "Hydra","Rain","Byul","Naniwa","polt","Day9","Artosis","Totalbiscuit","Tasteless",
+                "Rotterdam"};
+
+        Profile.myFriends.clear();
+
+        for(String s:friends){
+            User friend = new User();
+            friend.setUserName(s);
+            friend.setUserID(UUID.randomUUID().toString());
+            Profile.myFriends.add(friend);
+        }
+
+    }
+
+    private void getDummyClans() {
+
+        String[] clan1Members = new String[]{"robert","Gator","Pipsqueach","Bawser","Smeeth","Clayn"};
+        Clan clan1 = new Clan(makeDummyClans("TestClan1",clan1Members));
+        String[] clan2Members = new String[]{"MyMan","tractorGuy","MarineKing","BeetleJ","swiggity",
+                "Lorem","ipsum","dolor","sitAmet","consecateur","Jalepeno","Icemoon","MadFace","CheasyBastard",
+                "PringlesMaster","Hefeisters","Mailman","devined","SwagManJohn"};
+        Clan clan2 = new Clan(makeDummyClans("ROBO people",clan1Members));
+        String[] clan3Members = new String[]{"ChineseMan","GawdZilla","Sneglzilla","Kiksmaster","SwaggaJay","Horse"};
+        Clan clan3 = new Clan(makeDummyClans("Fizzle Masters",clan1Members));
+        String[] clan4Members = new String[]{"BirthdayBoy","Jump-a-tron","YoloSwagMan","HipsterMaster","LumberJohn","MountainDewster","Frazzlejazz"};
+        Clan clan4 = new Clan(makeDummyClans("Blackrock Raiders",clan1Members));
+
+        Profile.myClans.clear();
+
+        Profile.myClans.add(clan1);
+        Profile.myClans.add(clan2);
+        Profile.myClans.add(clan3);
+        Profile.myClans.add(clan4);
+
+
+
+    }
+
+    private JSONObject makeDummyClans(String clanName,String[] members){
+        JSONObject firstClan = new JSONObject();
+        String clan1ID=UUID.randomUUID().toString();
+        JSONArray clan1Members = new JSONArray();
+
+
+        try {
+            firstClan.put("Game",(int)((float)Math.random()*(float)8));
+            firstClan.put("MyRank",((int)((float)Math.random()*5.2))+1);
+            firstClan.put("ClanID",clan1ID);
+            firstClan.put("MessageOfDay","Hello to test Clan1");
+            firstClan.put("ClanName",clanName);
+
+            for(String s:members){
+                JSONObject clanMember = new JSONObject();
+                clanMember.put("Username",s);
+                clanMember.put("Rank",((int)((float)Math.random()*5.2))+1);
+                clanMember.put("ClanID",clan1ID);
+                clanMember.put("UserID",UUID.randomUUID().toString());
+                clan1Members.put(clanMember);
+            }
+
+            firstClan.put("Members",clan1Members);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return firstClan;
+    }
+
 
     /*
     public void getDummyClans() {

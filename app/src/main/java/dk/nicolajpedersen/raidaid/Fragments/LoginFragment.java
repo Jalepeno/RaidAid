@@ -48,8 +48,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if(v == login){
+            HTTPLogic httpLogic = new HTTPLogic();
+            httpLogic.getDummyProfile(username.getText().toString(),password.getText().toString(),getActivity());
             //login session
-
+/*
             HTTPLogic httpLogic = new HTTPLogic();
             int didStuffHappen = httpLogic.getProfileByLogin(username.getText().toString(), password.getText().toString(), getActivity().getApplicationContext());
 
@@ -77,7 +79,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 toast.show();
             }
 
-
+*/
         }else if(v == signup){
             ((StartupActivity)getActivity()).setSignupFragment();
         }

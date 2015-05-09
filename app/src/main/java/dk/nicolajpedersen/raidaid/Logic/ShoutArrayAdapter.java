@@ -9,10 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
-import dk.nicolajpedersen.raidaid.Data.Clan;
-import dk.nicolajpedersen.raidaid.Data.Member;
-import dk.nicolajpedersen.raidaid.Data.User;
+import dk.nicolajpedersen.raidaid.Data.Membership;
 import dk.nicolajpedersen.raidaid.Data.WallShout;
 import dk.nicolajpedersen.raidaid.R;
 
@@ -40,7 +37,7 @@ public class ShoutArrayAdapter extends ArrayAdapter<WallShout> {
         ImageView imgRank = (ImageView) rowView.findViewById(R.id.imgShoutRank);
 
         WallShout thisShout = shouts.get(position);
-        Member thisGuy = thisShout.getMember();
+        Membership thisGuy = thisShout.getMember();
 
         if(thisGuy != null) {
 

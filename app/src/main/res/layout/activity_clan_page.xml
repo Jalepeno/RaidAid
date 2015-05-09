@@ -4,46 +4,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:id="@+id/clanRelativeLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
     <LinearLayout
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        android:id="@+id/clanLinearLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/clanGameImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="50dp"
+        android:minHeight="56dp"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="20dp"
-        android:text="message of the day:"/>
+        android:text="Message of the day:"/>
 
     <TextView
         android:id="@+id/tvMessageOfDay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:padding="4dp"
+        android:background="#212121"
         android:minHeight="100dp"
+        android:textColor="#FFFFFF"
         android:textSize="20dp"
-        android:text="this is a text for the message of the day, stuff will be put in this box"
+        android:text="What a LOVELY day!"
 
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:text="shoutbox:"/>
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Shoutbox:"/>
 
     <ListView
         android:id="@+id/listviewShoutbox"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="150dp"
+        android:layout_marginBottom="8dp"
+        android:background="#212121">
 
         </ListView>
     <LinearLayout
@@ -71,27 +88,21 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="20dp"
-            android:text="members:"/>
+            android:text="Members:"/>
 
     <TextView
         android:id="@+id/tvClanMembers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="170dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="5dp"
-        android:text="member1, member2, member3, member4, member6,         member7, member8, member9, member10, member11, "
+        android:text="Madmax, Huntington, Widemouth, Pringlesteen, Worthmuch, NeverBackDown, BanjoHunter "
         />
 
+    </LinearLayout>
 
-        <Button
-            android:id="@+id/btnInvite"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="40dp"
-            android:text="Make invite"
-            />
 
-</LinearLayout>
+    </RelativeLayout>
 </ScrollView>

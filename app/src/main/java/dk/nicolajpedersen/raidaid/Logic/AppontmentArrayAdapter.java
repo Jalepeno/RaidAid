@@ -66,6 +66,9 @@ public class AppontmentArrayAdapter extends ArrayAdapter<Appointment> {
             case WORLDOFWARCRAFTHORDE:
                 background.setBackgroundColor(Color.RED); //R.drawable. - some wow horde image
                 break;
+            case HEROESOFTHESTORM:
+                background.setBackgroundColor(Color.BLUE); //R.drawable. - some wow horde image
+                break;
             default:
                 break;
         }

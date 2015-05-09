@@ -10,15 +10,13 @@
         <activity
             android:name=".Activities.StartupActivity"
             android:label="@string/app_name" >
-
-        </activity>
-        <activity android:name=".Activities.PageViewActivity" android:label="RaidAid">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.PageViewActivity" android:label="RaidAid"></activity>
         <activity android:name=".Activities.ClanPageActivity" android:label="RaidAid"></activity>
     </application>
 

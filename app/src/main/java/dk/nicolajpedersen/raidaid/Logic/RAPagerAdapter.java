@@ -9,11 +9,11 @@ import java.util.List;
 /**
  * Created by Nicolaj on 20-04-2015.
  */
-public class PagerAdapter extends FragmentPagerAdapter {
+public class RAPagerAdapter extends FragmentPagerAdapter {
 
     private final List<Fragment> fragments;
 
-    public PagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+    public RAPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         this.fragments = fragments;
     }
@@ -28,4 +28,5 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
         return fragments.size();
     }
+
 }

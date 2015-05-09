@@ -9,16 +9,18 @@ import org.json.JSONObject;
 public class Membership extends User {
     int rank;
     String clanID;
+
+
+    public Membership(String userName, String userID) {
+        super(userName, userID);
+    }
+
     public int getRank() {
         return rank;
     }
 
     public void setRank(int rank) {
         this.rank = rank;
-    }
-
-    public Membership(String userName, String userID) {
-        super(userName, userID);
     }
 
     public Membership(JSONObject jsonObject){
