@@ -3,6 +3,7 @@ package dk.nicolajpedersen.raidaid.Data;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.UUID;
@@ -10,14 +11,15 @@ import java.util.UUID;
 /**
  * Created by Nicolaj on 13-03-2015.
  */
-public class Appointment implements Comparator<Appointment>{
-    private GregorianCalendar date;
+public class Appointment{
+    private Calendar date;
     private Clan clan;
  //   private ArrayList<User> readyppl;
     private String headline, description;
 
 
     public Appointment (JSONObject jsonAppoint){
+        date = Calendar.getInstance();
         try {
             date.setTimeInMillis(jsonAppoint.getLong("Date"));
             clan = Profile.getClanByID(UUID.fromString(jsonAppoint.getString("ClanID")));
@@ -30,11 +32,11 @@ public class Appointment implements Comparator<Appointment>{
 
     }
 
-    public GregorianCalendar getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(GregorianCalendar date) {
+    public void setDate(Calendar date) {
         this.date = date;
     }
 
@@ -70,10 +72,5 @@ public class Appointment implements Comparator<Appointment>{
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public int compare(Appointment lhs, Appointment rhs) {
-        return lhs.getDate().compareTo(rhs.getDate());
     }
 }

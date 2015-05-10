@@ -48,7 +48,7 @@ public class ClanPageActivity extends ActionBarActivity implements View.OnClickL
             lvShout.setAdapter(sAA);
 
             // assigning buttons and textboxes.
-            btnInvite = (Button) findViewById(R.id.btnInvite);
+            btnInvite = (Button) findViewById(R.id.buttonFloatClanPage);
             btnShout = (Button) findViewById(R.id.btnShout);
             etShout =(EditText) findViewById(R.id.etShoutText);
             btnShout.setOnClickListener(this);

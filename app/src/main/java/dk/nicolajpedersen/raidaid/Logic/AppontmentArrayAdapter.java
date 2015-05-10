@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 import dk.nicolajpedersen.raidaid.Data.Appointment;
 import dk.nicolajpedersen.raidaid.Data.Game;
-import dk.nicolajpedersen.raidaid.Data.Guild;
 import dk.nicolajpedersen.raidaid.R;
 
 /**
@@ -41,35 +40,35 @@ public class AppontmentArrayAdapter extends ArrayAdapter<Appointment> {
         TextView clanName = (TextView) rowView.findViewById(R.id.tvAppointClan);
         TextView rdyMembers = (TextView) rowView.findViewById(R.id.tvAppointMembersReady);
         clanName.setText(thisAppointment.getClan().getClanName());
-        rdyMembers.setText("rdy: "+thisAppointment.getReadyppl().size()+"/"+thisAppointment.getClan().getMembers().size());
         Game thisAppointGame = thisAppointment.getClan().getGame();
         LinearLayout background = (LinearLayout) rowView.findViewById(R.id.outerLayout);
         switch (thisAppointGame){
             case COUNTERSTRIKE:
-                background.setBackgroundColor(Color.GRAY); //R.drawable. - some couterstringe image
+                background.setBackgroundResource(R.drawable.background_cs); //R.drawable. - some couterstringe image
                 break;
             case DIABLO:
-                background.setBackgroundColor(Color.DKGRAY); //R.drawable. - some diablo image
+                background.setBackgroundResource(R.drawable.background_diablo); //R.drawable. - some diablo image
                 break;
             case DOTA2:
-                background.setBackgroundColor(Color.CYAN); //R.drawable. - some dota2 image
+                background.setBackgroundResource(R.drawable.background_dota); //R.drawable. - some dota2 image
                 break;
             case LEAGUEOFLEGENDS:
-                background.setBackgroundColor(Color.GREEN); //R.drawable. - some lol image
+                background.setBackgroundResource(R.drawable.background_lol); //R.drawable. - some lol image
                 break;
             case STARCRAFT:
-                background.setBackgroundColor(Color.YELLOW); //R.drawable. - some starcraft image
+                background.setBackgroundResource(R.drawable.background_sc); //R.drawable. - some starcraft image
                 break;
             case WORLDOFWARCRAFTALLIANCE:
-                background.setBackgroundColor(Color.BLUE); //R.drawable. - some wow alliance image
+                background.setBackgroundResource(R.drawable.background_alliance); //R.drawable. - some wow alliance image
                 break;
             case WORLDOFWARCRAFTHORDE:
-                background.setBackgroundColor(Color.RED); //R.drawable. - some wow horde image
+                background.setBackgroundResource(R.drawable.background_horde); //R.drawable. - some wow horde image
                 break;
             case HEROESOFTHESTORM:
-                background.setBackgroundColor(Color.BLUE); //R.drawable. - some wow horde image
+                background.setBackgroundResource(R.drawable.background_hots); //R.drawable. - some wow horde image
                 break;
             default:
+                background.setBackgroundColor(Color.DKGRAY);
                 break;
         }
 

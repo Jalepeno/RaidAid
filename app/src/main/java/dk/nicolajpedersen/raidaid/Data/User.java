@@ -21,6 +21,7 @@ public class User {
         try {
             userName = jsonObject.getString("Username");
             userID = jsonObject.getString("UserID");
+            System.out.println("\tmember: "+jsonObject.getString("Username"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

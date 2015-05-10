@@ -30,6 +30,14 @@ public class Clan {
             clanID = UUID.fromString(newClan.getString("ClanID"));
             clanName = newClan.getString("ClanName");
             welcomeMessage = newClan.getString("MessageOfDay");
+            members = new ArrayList<>();
+            appointments = new ArrayList<>();
+            shouts = new ArrayList<>();
+            JSONArray membersArray = newClan.getJSONArray("Members");
+            for(int n = 0; n < membersArray.length(); n++)
+            {
+                members.add(new Membership(membersArray.getJSONObject(n)));
+            }
 
 
         } catch (JSONException e) {

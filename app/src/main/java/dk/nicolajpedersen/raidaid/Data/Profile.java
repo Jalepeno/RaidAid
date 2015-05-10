@@ -3,6 +3,7 @@ package dk.nicolajpedersen.raidaid.Data;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -15,10 +16,12 @@ public class Profile {
     public static String username, password;
     public static String userID;
 
+
     public Profile(JSONObject loginObject) {
 
 
     }
+
 
     public ArrayList<Clan> getMyClans() {
         return myClans;

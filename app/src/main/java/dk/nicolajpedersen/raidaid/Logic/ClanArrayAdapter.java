@@ -6,14 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.astuetz.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
 
 import dk.nicolajpedersen.raidaid.Data.Clan;
 import dk.nicolajpedersen.raidaid.Data.Game;
-import dk.nicolajpedersen.raidaid.Data.Guild;
 import dk.nicolajpedersen.raidaid.R;
 
 /**
@@ -21,8 +23,8 @@ import dk.nicolajpedersen.raidaid.R;
  */
 public class ClanArrayAdapter extends ArrayAdapter<Clan> {
 
-    private final ArrayList<Clan> clans;
-    private final Context context;
+    private ArrayList<Clan> clans;
+    private Context context;
 
 
     public ClanArrayAdapter(Context context, ArrayList<Clan> clans) {
@@ -39,41 +41,56 @@ public class ClanArrayAdapter extends ArrayAdapter<Clan> {
 
         Clan thisClan = clans.get(position);
         TextView clanName = (TextView) rowView.findViewById(R.id.listClanName);
-        TextView members = (TextView) rowView.findViewById(R.id.tvListMembers);
+        TextView members = (TextView) rowView.findViewById(R.id.tvClanListMemberCount);
+        ImageView gameImg = (ImageView) rowView.findViewById(R.id.gameImageClanList);
         clanName.setText(thisClan.getClanName());
         members.setText("members: "+thisClan.getMembers().size());
         Game thisClanGame = thisClan.getGame();
+
         LinearLayout background = (LinearLayout) rowView.findViewById(R.id.outerLayout);
+
+
+
         switch (thisClanGame){
             case COUNTERSTRIKE:
-                background.setBackgroundColor(Color.GRAY); //R.drawable. - some couterstringe image
+                background.setBackgroundResource(R.drawable.background_cs); //R.drawable. - some couterstrike image
+                gameImg.setImageResource(R.drawable.logo_cs);
                 break;
             case DIABLO:
-                background.setBackgroundColor(Color.DKGRAY); //R.drawable. - some diablo image
+                background.setBackgroundResource(R.drawable.background_diablo); //R.drawable. - some diablo image
+                gameImg.setImageResource(R.drawable.logo_diablo);
                 break;
             case DOTA2:
-                background.setBackgroundColor(Color.CYAN); //R.drawable. - some dota2 image
+                background.setBackgroundResource(R.drawable.background_dota); //R.drawable. - some dota2 image
+                gameImg.setImageResource(R.drawable.logo_dota);
                 break;
             case LEAGUEOFLEGENDS:
-                background.setBackgroundColor(Color.GREEN); //R.drawable. - some lol image
+                background.setBackgroundResource(R.drawable.background_lol); //R.drawable. - some lol image
+                gameImg.setImageResource(R.drawable.logo_lol);
                 break;
             case STARCRAFT:
-                background.setBackgroundColor(Color.YELLOW); //R.drawable. - some starcraft image
+                background.setBackgroundResource(R.drawable.background_sc); //R.drawable. - some starcraft image
+                gameImg.setImageResource(R.drawable.logo_starcraft);
                 break;
             case WORLDOFWARCRAFTALLIANCE:
-                background.setBackgroundColor(Color.BLUE); //R.drawable. - some wow alliance image
+                background.setBackgroundResource(R.drawable.background_alliance); //R.drawable. - some wow alliance image
+                gameImg.setImageResource(R.drawable.logo_wow);
                 break;
             case WORLDOFWARCRAFTHORDE:
-                    background.setBackgroundColor(Color.RED); //R.drawable. - some wow horde image
+                    background.setBackgroundResource(R.drawable.background_horde); //R.drawable. - some wow horde image
+                gameImg.setImageResource(R.drawable.logo_wow);
                 break;
             case HEROESOFTHESTORM:
-                    background.setBackgroundColor(Color.BLUE); //R.drawable. - some wow horde image
+                    background.setBackgroundResource(R.drawable.background_hots); //R.drawable. - some wow horde image
+                gameImg.setImageResource(R.drawable.logo_hots);
                 break;
             default:
+                    background.setBackgroundColor(Color.DKGRAY);
                 break;
         }
 
         return rowView;
 
     }
+
 }

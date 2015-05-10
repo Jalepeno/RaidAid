@@ -20,8 +20,12 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 
+import dk.nicolajpedersen.raidaid.Data.Appointment;
 import dk.nicolajpedersen.raidaid.Data.Clan;
 import dk.nicolajpedersen.raidaid.Data.Game;
 import dk.nicolajpedersen.raidaid.Data.Profile;
@@ -251,11 +255,52 @@ public class HTTPLogic {
         getDummyClans();
         getDummyFriends();
         getDummyAppointments();
+
+        System.out.println("Profile completed");
+        for(Clan c :Profile.myClans){
+            System.out.println("clan: "+c.getClanName()+" exists");
+        }
     }
 
     private void getDummyAppointments() {
+        if(Profile.myAppointments != null){
+            Profile.myAppointments.clear();
+        }
+        JSONObject appont1 = makeDummyAppointment(2,"MC Raid","Its time for some more molten core.. dips on thunderfury");
+        Profile.myAppointments.add(new Appointment(appont1));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(2,"MC Raid","Its time for some more molten core.. dips on thunderfury")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(2,"MC Raid","Its time for some more molten core.. dips on thunderfury")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(2,"MC Raid","Its time for some more molten core.. dips on thunderfury")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(2,"Black Rock Spire","epic loot is under way.. please dont jenkins this up")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(3,"PWC vs Abehatterne","er i klar til at kaste med bananer?")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(3,"Epic Lan party","it aint over untill a mom brings the toilet to you")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(1,"some turnament","yay guys.. we shall win this one")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(2,"more turnaments","please refrain all things from carrot")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(3,"StarCraft turnament","All AMPs should be over 9000!!!!")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(4,"MC Raid","Its time for some more molten core.. dips on thunderfury")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(1,"MC Raid","Its time for some more molten core.. dips on thunderfury")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(2,"Alterac Marathon","the ultimate pvp day is here")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(1,"Arathi Basin", "Grand marshal status incomming for us all!")));
 
+        Collections.sort(Profile.myAppointments, new AppointmentComparator());
+        System.out.println("Appointments added");
 
+    }
+    private JSONObject makeDummyAppointment(int clan, String eventName,String evenDesript){
+        JSONObject returnAppointment = new JSONObject();
+        long offsetDays = (long) ((long)1000*60*60*24*(Math.random()*28));
+        long offsetHours = (long) ((1000*60*60)*(Math.random()*24));
+        long offsetMinutes = (long) ((1000*60)*(Math.random()*60));
+        try {
+            returnAppointment.put("Date", System.currentTimeMillis()+offsetMinutes+offsetHours+offsetDays);
+            returnAppointment.put("ClanID",Profile.myClans.get(clan%Profile.myClans.size()).getClanID().toString());
+            returnAppointment.put("Headline",eventName);
+            returnAppointment.put("Description",evenDesript);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return returnAppointment;
     }
 
     private void getDummyFriends() {
@@ -265,7 +310,10 @@ public class HTTPLogic {
                 "Hydra","Rain","Byul","Naniwa","polt","Day9","Artosis","Totalbiscuit","Tasteless",
                 "Rotterdam"};
 
-        Profile.myFriends.clear();
+        if(Profile.myFriends != null){
+            Profile.myFriends.clear();
+        }
+
 
         for(String s:friends){
             User friend = new User();
@@ -274,6 +322,7 @@ public class HTTPLogic {
             Profile.myFriends.add(friend);
         }
 
+        System.out.println("Friends added");
     }
 
     private void getDummyClans() {
@@ -283,20 +332,22 @@ public class HTTPLogic {
         String[] clan2Members = new String[]{"MyMan","tractorGuy","MarineKing","BeetleJ","swiggity",
                 "Lorem","ipsum","dolor","sitAmet","consecateur","Jalepeno","Icemoon","MadFace","CheasyBastard",
                 "PringlesMaster","Hefeisters","Mailman","devined","SwagManJohn"};
-        Clan clan2 = new Clan(makeDummyClans("ROBO people",clan1Members));
-        String[] clan3Members = new String[]{"ChineseMan","GawdZilla","Sneglzilla","Kiksmaster","SwaggaJay","Horse"};
-        Clan clan3 = new Clan(makeDummyClans("Fizzle Masters",clan1Members));
+        Clan clan2 = new Clan(makeDummyClans("ROBO people",clan2Members));
+        String[] clan3Members = new String[]{"ChineseMan","GawdZilla","Sneglzilla","KiksMaster","SwaggaJay","Horse"};
+        Clan clan3 = new Clan(makeDummyClans("Fizzle Masters",clan3Members));
         String[] clan4Members = new String[]{"BirthdayBoy","Jump-a-tron","YoloSwagMan","HipsterMaster","LumberJohn","MountainDewster","Frazzlejazz"};
-        Clan clan4 = new Clan(makeDummyClans("Blackrock Raiders",clan1Members));
+        Clan clan4 = new Clan(makeDummyClans("Blackrock Raiders",clan4Members));
 
-        Profile.myClans.clear();
+        if(Profile.myClans != null){
+            Profile.myClans.clear();
+        }
 
         Profile.myClans.add(clan1);
         Profile.myClans.add(clan2);
         Profile.myClans.add(clan3);
         Profile.myClans.add(clan4);
 
-
+        System.out.println("Clans added");
 
     }
 

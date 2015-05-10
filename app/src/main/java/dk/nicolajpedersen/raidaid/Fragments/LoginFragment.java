@@ -14,9 +14,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import dk.nicolajpedersen.raidaid.Activities.PageViewActivity;
 import dk.nicolajpedersen.raidaid.Activities.StartupActivity;
+import dk.nicolajpedersen.raidaid.Data.Appointment;
+import dk.nicolajpedersen.raidaid.Data.Clan;
 import dk.nicolajpedersen.raidaid.Data.Profile;
+import dk.nicolajpedersen.raidaid.Data.User;
 import dk.nicolajpedersen.raidaid.Logic.HTTPLogic;
 import dk.nicolajpedersen.raidaid.R;
 
@@ -47,9 +52,22 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        if(v == login){
+        if(v == login) {
+            if (Profile.myAppointments == null) {
+                Profile.myAppointments = new ArrayList<Appointment>();
+                Profile.myClans = new ArrayList<Clan>();
+                Profile.myFriends = new ArrayList<User>();
+            }
             HTTPLogic httpLogic = new HTTPLogic();
-            httpLogic.getDummyProfile(username.getText().toString(),password.getText().toString(),getActivity());
+
+            httpLogic.getDummyProfile(username.getText().toString(), password.getText().toString(), getActivity());
+
+            getActivity().finish();
+            Intent i = new Intent(getActivity()
+                    .getApplicationContext(), PageViewActivity.class);
+            startActivity(i);
+
+
             //login session
 /*
             HTTPLogic httpLogic = new HTTPLogic();

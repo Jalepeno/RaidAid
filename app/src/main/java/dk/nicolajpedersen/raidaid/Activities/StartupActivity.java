@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.splunk.mint.Mint;
+//import com.splunk.mint.Mint;
 
 import dk.nicolajpedersen.raidaid.Fragments.LoginFragment;
 import dk.nicolajpedersen.raidaid.Fragments.SignupFragment;
@@ -27,7 +27,7 @@ public class StartupActivity extends FragmentActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment_holder);
 
-        Mint.initAndStartSession(StartupActivity.this, "f309539b");
+//       Mint.initAndStartSession(StartupActivity.this, "f309539b");
 
         if(savedInstanceState == null){
             setLoginFragment();
@@ -58,4 +58,8 @@ public class StartupActivity extends FragmentActivity{
                 .replace(R.id.frameLayout1, loginFragment).addToBackStack(null).commit();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
