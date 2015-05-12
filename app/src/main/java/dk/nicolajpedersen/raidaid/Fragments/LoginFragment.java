@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,12 +15,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.gc.materialdesign.views.ButtonFlat;
+import com.gc.materialdesign.views.ButtonRectangle;
+
 import java.util.ArrayList;
 
 import dk.nicolajpedersen.raidaid.Activities.PageViewActivity;
 import dk.nicolajpedersen.raidaid.Activities.StartupActivity;
 import dk.nicolajpedersen.raidaid.Data.Appointment;
 import dk.nicolajpedersen.raidaid.Data.Clan;
+import dk.nicolajpedersen.raidaid.Data.Friend;
 import dk.nicolajpedersen.raidaid.Data.Profile;
 import dk.nicolajpedersen.raidaid.Data.User;
 import dk.nicolajpedersen.raidaid.Logic.HTTPLogic;
@@ -30,7 +35,8 @@ import dk.nicolajpedersen.raidaid.R;
  */
 public class LoginFragment extends Fragment implements View.OnClickListener{
     EditText username,password;
-    Button signup,login;
+    ButtonFlat signup;
+    ButtonFlat login;
     View loginView;
     SharedPreferences sharedPreferences;
 
@@ -38,10 +44,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         loginView = inflater.inflate(R.layout.fragment_login,container,false);
+
         username =(EditText) loginView.findViewById(R.id.etUserName);
         password =(EditText) loginView.findViewById(R.id.etpassword);
-        signup = (Button) loginView.findViewById(R.id.btnSignup);
-        login = (Button) loginView.findViewById(R.id.btn_login);
+
+        signup = (ButtonFlat) loginView.findViewById(R.id.btnSignup);
+        signup.setBackgroundColor(Color.WHITE);
+        login = (ButtonFlat) loginView.findViewById(R.id.btn_login);
+        login.setBackgroundColor(Color.parseColor("#FF9800"));
+
         signup.setOnClickListener(this);
         login.setOnClickListener(this);
 
@@ -56,7 +67,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             if (Profile.myAppointments == null) {
                 Profile.myAppointments = new ArrayList<Appointment>();
                 Profile.myClans = new ArrayList<Clan>();
-                Profile.myFriends = new ArrayList<User>();
+                Profile.myFriends = new ArrayList<Friend>();
             }
             HTTPLogic httpLogic = new HTTPLogic();
 

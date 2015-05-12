@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.astuetz.PagerSlidingTabStrip;
 
@@ -29,6 +30,10 @@ public class PageViewActivity extends ActionBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewpager);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_viewPager);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+        }
 
 
         // Initialize the ViewPager and set an adapter

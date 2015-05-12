@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Profile {
     public static ArrayList<Clan> myClans;
     public static ArrayList<Appointment> myAppointments;
-    public static ArrayList<User> myFriends;
+    public static ArrayList<Friend> myFriends;
     public static String username, password;
     public static String userID;
 
@@ -38,6 +38,8 @@ public class Profile {
     public void setMyAppointments(ArrayList<Appointment> myAppointments) {
         this.myAppointments = myAppointments;
     }
+
+
 
     public String getUsername() {
         return username;

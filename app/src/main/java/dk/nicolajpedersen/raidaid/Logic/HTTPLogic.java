@@ -27,6 +27,7 @@ import java.util.UUID;
 
 import dk.nicolajpedersen.raidaid.Data.Appointment;
 import dk.nicolajpedersen.raidaid.Data.Clan;
+import dk.nicolajpedersen.raidaid.Data.Friend;
 import dk.nicolajpedersen.raidaid.Data.Game;
 import dk.nicolajpedersen.raidaid.Data.Profile;
 import dk.nicolajpedersen.raidaid.Data.User;
@@ -175,7 +176,7 @@ public class HTTPLogic {
                     for (int u = 0; u < response.length(); u++) {
                         try {
 
-                            Profile.myFriends.add(new User((JSONObject) response.get(u)));
+                            Profile.myFriends.add(new Friend((JSONObject) response.get(u)));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -316,13 +317,12 @@ public class HTTPLogic {
 
 
         for(String s:friends){
-            User friend = new User();
+            Friend friend = new Friend();
             friend.setUserName(s);
             friend.setUserID(UUID.randomUUID().toString());
             Profile.myFriends.add(friend);
         }
 
-        System.out.println("Friends added");
     }
 
     private void getDummyClans() {

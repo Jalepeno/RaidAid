@@ -3,13 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/invitePlayer"
-    android:title="Invite Player"
-    android:orderInCategory="100"
-    app:showAsAction="never"/>
+        android:title="Invite Player"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/PromotePlayer"
+        android:title="Promote Player"
+        android:orderInCategory="90"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_msgOfDay"
+        android:title="Set Welcome Msg"
+        android:orderInCategory="70"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_AppointMan"
+        android:title="Appointment manager"
+        android:orderInCategory="60"
+        app:showAsAction="never"/>
+
 
     <item android:id="@+id/menu_kickPlayer"
         android:title="Kick Player"
-        android:orderInCategory="80"
+        android:orderInCategory="40"
         app:showAsAction="never"/>
 
 

@@ -3,13 +3,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/outerLayout">
+    android:id="@+id/outerLayout"
+    android:gravity="center_vertical">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+>
 
         <ImageView
             android:id="@+id/gameImageClanList"
@@ -19,37 +20,42 @@
             android:minWidth="50dp"
             android:layout_margin="16dp"/>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            >
+
         <TextView
             android:id="@+id/listClanName"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Clan Name Here"
             android:singleLine="true"
+            android:textColor="#212121"
             android:layout_gravity="center"
-            android:textColor="#000000"
             android:textSize="30dp"/>
 
-        <ImageView
-            android:id="@+id/factionImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="50dp"
-            android:minWidth="50dp"
-            android:layout_margin="5dp"/>
+            <TextView
+                android:id="@+id/tvClanListMemberCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:textSize="14dp"
+                android:textColor="#424242"
+                android:text="MemberCount"/>
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvClanListMemberCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:textSize="14dp"
-        android:text="MemberCount"/>
+
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="#1EFFFFFF" />
+        android:background="#14FFFFFF" />
 </LinearLayout>

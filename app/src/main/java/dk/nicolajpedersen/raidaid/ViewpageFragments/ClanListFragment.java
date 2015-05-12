@@ -1,6 +1,8 @@
 package dk.nicolajpedersen.raidaid.ViewpageFragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.view.*;
 import android.widget.ListView;
@@ -18,6 +20,7 @@ import dk.nicolajpedersen.raidaid.R;
 public class ClanListFragment extends Fragment implements View.OnClickListener{
     ClanArrayAdapter clanAA;
     ButtonFloat btnFloat;
+    boolean timerFinished;
 
     // Inflate the view for the fragment based on layout XML
     @Override
@@ -27,7 +30,9 @@ public class ClanListFragment extends Fragment implements View.OnClickListener{
         clanAA = new ClanArrayAdapter(getActivity(),Profile.myClans);
         clanList.setAdapter(clanAA);
         btnFloat = (ButtonFloat) view.findViewById(R.id.buttonFloatListClanPage);
+        btnFloat.setBackgroundColor(Color.parseColor("#FF9800"));
         btnFloat.setOnClickListener(this);
+        timerFinished =false;
 
         return view;
     }
@@ -35,6 +40,10 @@ public class ClanListFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
+        if(v == btnFloat){
+
+
+        }
     }
 }
 

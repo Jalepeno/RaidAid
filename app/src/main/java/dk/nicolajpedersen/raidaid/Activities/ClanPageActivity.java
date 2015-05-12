@@ -2,6 +2,7 @@ package dk.nicolajpedersen.raidaid.Activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +35,11 @@ public class ClanPageActivity extends ActionBarActivity implements View.OnClickL
         setContentView(R.layout.activity_clan_page);
         httpLogic = new HTTPLogic();
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_clan);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+        }
+
 
         try{
             clan = (Clan) getIntent().getSerializableExtra("MyClan");
@@ -62,7 +68,7 @@ public class ClanPageActivity extends ActionBarActivity implements View.OnClickL
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
+        getMenuInflater().inflate(R.menu.menu_clan, menu);
         return true;
     }
 
@@ -74,11 +80,47 @@ public class ClanPageActivity extends ActionBarActivity implements View.OnClickL
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
+        switch (id) {
+            case R.id.invitePlayer:
+                invitePlayer();
+                break;
+            case R.id.PromotePlayer:
+                startPromotePlayer();
+                break;
+            case R.id.menu_msgOfDay:
+                getMsgOfDayDialog();
+                break;
+            case R.id.menu_AppointMan:
+                getAppointmentManager();
+                break;
+            case R.id.menu_kickPlayer:
+                kickPlayer();
+                break;
+            default:
+                break;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void getAppointmentManager() {
+
+    }
+
+    private void getMsgOfDayDialog() {
+
+    }
+
+    private void startPromotePlayer() {
+
+    }
+
+    private void kickPlayer() {
+
+    }
+
+    private void invitePlayer() {
+
     }
 
 

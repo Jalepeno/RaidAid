@@ -4,113 +4,118 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-<com.gc.materialdesign.views.ScrollView
-    android:id="@+id/scroll"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-    <RelativeLayout
-        android:id="@+id/clanRelativeLayout"
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/clanLinearLayout"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/clanGameImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="56dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-        android:text="Message of the day:"/>
-
-    <TextView
-        android:id="@+id/tvMessageOfDay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:padding="4dp"
-        android:background="#212121"
-        android:minHeight="100dp"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        android:text="What a LOVELY day!"
-
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="Shoutbox:"/>
-
-    <ListView
-        android:id="@+id/listviewShoutbox"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginBottom="8dp"
-        android:background="#212121">
-
-        </ListView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/etShoutText"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"/>
-
-        <Button
-            android:id="@+id/btnShout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Shout"
-            android:layout_marginRight="20dp"/>
-
-    </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.Toolbar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/toolbar_clan"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
-            android:text="Members:"/>
+            android:background="?attr/colorPrimaryDark"/>
 
-    <TextView
-        android:id="@+id/tvClanMembers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="170dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="5dp"
-        android:text="Madmax, Huntington, Widemouth, Pringlesteen, Worthmuch, NeverBackDown, BanjoHunter "
-        />
+        <com.gc.materialdesign.views.ScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+
+            <LinearLayout
+                android:id="@+id/clanLinearLayout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/clanGameImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="56dp"
+                />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Message of the day:"/>
+
+                <TextView
+                    android:id="@+id/tvMessageOfDay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:padding="4dp"
+                    android:background="#212121"
+                    android:minHeight="100dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp"
+                    android:text="What a LOVELY day!"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Shoutbox:"/>
+
+                <ListView
+                    android:id="@+id/listviewShoutbox"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#212121"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etShoutText"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"/>
+
+                    <Button
+                        android:id="@+id/btnShout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Shout"
+                        android:layout_marginRight="20dp"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Members:"/>
+
+                <TextView
+                    android:id="@+id/tvClanMembers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="170dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Madmax, Huntington, Widemouth, Pringlesteen, Worthmuch, NeverBackDown, BanjoHunter "
+                />
+
+            </LinearLayout>
+
+        </com.gc.materialdesign.views.ScrollView>
     </LinearLayout>
-    </RelativeLayout>
-
-</com.gc.materialdesign.views.ScrollView>
     <com.gc.materialdesign.views.ButtonFloat
         android:id="@+id/buttonFloatClanPage"
         android:layout_width="wrap_content"
@@ -119,7 +124,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="24dp"
-        android:background="#FF9800"
+        android:background="?attr/colorAccent"
         materialdesign:animate="true"
         materialdesign:iconDrawable="@drawable/hots_rally" />
 </RelativeLayout>

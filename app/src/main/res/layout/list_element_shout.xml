@@ -37,4 +37,9 @@
         android:layout_marginLeft="15dp"
         android:text="the message will be displayed here!"
         />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#1EFFFFFF" />
 </LinearLayout>
