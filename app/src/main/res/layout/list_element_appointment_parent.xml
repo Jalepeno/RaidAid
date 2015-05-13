@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/llAppointBanner"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <ImageView
+            android:id="@+id/imgAppointGame"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_gravity="center_vertical"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvAppointClan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24dp"
+                android:textColor="?attr/colorPrimaryDark"
+                android:text="Clan Name:"/>
+
+            <TextView
+                android:id="@+id/tvAppointName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorPrimaryDark"
+                android:text="Event Name"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="84dp"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvAppointDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="?attr/colorPrimaryDark"
+                android:textSize="20dp"
+                android:text="14/04"
+                />
+
+            <TextView
+                android:id="@+id/tvAppointTimeofDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorPrimary"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="8dp"
+                android:text="13:37"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <!-- This is the expanded information on the Appointment-->
+    <LinearLayout
+        android:id="@+id/llAppointDetail"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorPrimary"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvAppointDescription"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="24dp"
+            android:padding="8dp"
+            android:background="?attr/colorPrimaryDark"
+            android:text="This is the eventDescription!.. please show yourself"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:id="@+id/tvAppointMembersReady"
+                android:background="?attr/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="72dp"
+                android:text="members ready: 15/20"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="I'm Ready"
+                android:layout_marginRight="4dp"
+                android:textColor="?attr/colorAccent"
+                android:gravity="right"/>
+            <CheckBox
+                android:id="@+id/cbAppointReady"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

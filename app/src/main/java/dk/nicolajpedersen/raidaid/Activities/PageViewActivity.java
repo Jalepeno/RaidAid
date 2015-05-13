@@ -30,6 +30,7 @@ public class PageViewActivity extends ActionBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewpager);
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_viewPager);
         if (toolbar != null) {
             setSupportActionBar(toolbar);

@@ -23,12 +23,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.GregorianCalendar;
+import java.util.Random;
 import java.util.UUID;
 
 import dk.nicolajpedersen.raidaid.Data.Appointment;
 import dk.nicolajpedersen.raidaid.Data.Clan;
 import dk.nicolajpedersen.raidaid.Data.Friend;
 import dk.nicolajpedersen.raidaid.Data.Game;
+import dk.nicolajpedersen.raidaid.Data.Membership;
 import dk.nicolajpedersen.raidaid.Data.Profile;
 import dk.nicolajpedersen.raidaid.Data.User;
 import dk.nicolajpedersen.raidaid.Data.WallShout;
@@ -258,45 +260,62 @@ public class HTTPLogic {
         getDummyAppointments();
 
         System.out.println("Profile completed");
-        for(Clan c :Profile.myClans){
-            System.out.println("clan: "+c.getClanName()+" exists");
-        }
+
     }
 
     private void getDummyAppointments() {
         if(Profile.myAppointments != null){
             Profile.myAppointments.clear();
         }
+
         JSONObject appont1 = makeDummyAppointment(2,"MC Raid","Its time for some more molten core.. dips on thunderfury");
         Profile.myAppointments.add(new Appointment(appont1));
         Profile.myAppointments.add(new Appointment(makeDummyAppointment(2,"MC Raid","Its time for some more molten core.. dips on thunderfury")));
         Profile.myAppointments.add(new Appointment(makeDummyAppointment(2,"MC Raid","Its time for some more molten core.. dips on thunderfury")));
         Profile.myAppointments.add(new Appointment(makeDummyAppointment(2,"MC Raid","Its time for some more molten core.. dips on thunderfury")));
         Profile.myAppointments.add(new Appointment(makeDummyAppointment(2,"Black Rock Spire","epic loot is under way.. please dont jenkins this up")));
-        Profile.myAppointments.add(new Appointment(makeDummyAppointment(3,"PWC vs Abehatterne","er i klar til at kaste med bananer?")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(0,"PWC vs Abehatterne","er i klar til at kaste med bananer?")));
         Profile.myAppointments.add(new Appointment(makeDummyAppointment(3,"Epic Lan party","it aint over untill a mom brings the toilet to you")));
         Profile.myAppointments.add(new Appointment(makeDummyAppointment(1,"some turnament","yay guys.. we shall win this one")));
-        Profile.myAppointments.add(new Appointment(makeDummyAppointment(2,"more turnaments","please refrain all things from carrot")));
-        Profile.myAppointments.add(new Appointment(makeDummyAppointment(3,"StarCraft turnament","All AMPs should be over 9000!!!!")));
-        Profile.myAppointments.add(new Appointment(makeDummyAppointment(4,"MC Raid","Its time for some more molten core.. dips on thunderfury")));
-        Profile.myAppointments.add(new Appointment(makeDummyAppointment(1,"MC Raid","Its time for some more molten core.. dips on thunderfury")));
-        Profile.myAppointments.add(new Appointment(makeDummyAppointment(2,"Alterac Marathon","the ultimate pvp day is here")));
-        Profile.myAppointments.add(new Appointment(makeDummyAppointment(1,"Arathi Basin", "Grand marshal status incomming for us all!")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(2, "more turnaments", "please refrain all things from carrot")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(3, "StarCraft turnament", "All AMPs should be over 9000!!!!")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(0, "MC Raid", "Its time for some more molten core.. dips on thunderfury")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(1, "MC Raid", "Its time for some more molten core.. dips on thunderfury")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(2, "Alterac Marathon", "the ultimate pvp day is here")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(1, "Arathi Basin", "Grand marshal status incomming for us all!")));
 
         Collections.sort(Profile.myAppointments, new AppointmentComparator());
-        System.out.println("Appointments added");
+
 
     }
     private JSONObject makeDummyAppointment(int clan, String eventName,String evenDesript){
+
         JSONObject returnAppointment = new JSONObject();
-        long offsetDays = (long) ((long)1000*60*60*24*(Math.random()*28));
-        long offsetHours = (long) ((1000*60*60)*(Math.random()*24));
-        long offsetMinutes = (long) ((1000*60)*(Math.random()*60));
+        long offsetday = ((long)1000*60*60*24*((long)(Math.random()*28.0)));
+        long offsetHour = ((long)1000*60*60*((long)(Math.random()*24.0)));
+        long offsetMinute = ((long)1000*60*60*((long)(Math.random()*60.0)));
+
+
         try {
-            returnAppointment.put("Date", System.currentTimeMillis()+offsetMinutes+offsetHours+offsetDays);
-            returnAppointment.put("ClanID",Profile.myClans.get(clan%Profile.myClans.size()).getClanID().toString());
+            returnAppointment.put("Date", System.currentTimeMillis()+offsetday+offsetHour+offsetMinute);
+            System.out.println();
+            System.out.println("Clan: \"" + Profile.myClans.get(clan).getClanName() + " \"has been selected");
+            System.out.println("Clan id: "+Profile.myClans.get(clan).getClanID().toString());
+
+            returnAppointment.put("ClanID", Profile.myClans.get(clan).getClanID().toString());
             returnAppointment.put("Headline",eventName);
             returnAppointment.put("Description",evenDesript);
+            JSONArray invitedUsers = new JSONArray();
+            for(Membership m : Profile.myClans.get(clan).getMembers()){
+                JSONObject invGuy = new JSONObject();
+                invGuy.put("Username",m.getUserName());
+                invGuy.put("UserID",m.getUserID());
+                invGuy.put("IsReady",getRandomBoolean());
+                invitedUsers.put(invGuy);
+            }
+            returnAppointment.put("Invited",invitedUsers);
+
+
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -358,10 +377,11 @@ public class HTTPLogic {
 
 
         try {
-            firstClan.put("Game",(int)((float)Math.random()*(float)8));
-            firstClan.put("MyRank",((int)((float)Math.random()*5.2))+1);
+            firstClan.put("Game",(int)((float)Math.random()*(float)8)+1);
+            int myRank =((int)((float)Math.random()*5.2))+1;
+            firstClan.put("MyRank",myRank);
             firstClan.put("ClanID",clan1ID);
-            firstClan.put("MessageOfDay","Hello to test Clan1");
+            firstClan.put("MessageOfDay","Hello "+clanName);
             firstClan.put("ClanName",clanName);
 
             for(String s:members){
@@ -373,6 +393,14 @@ public class HTTPLogic {
                 clan1Members.put(clanMember);
             }
 
+            // adding dummyprofile to clan
+            JSONObject profileMembership = new JSONObject();
+            profileMembership.put("Username", Profile.username);
+            profileMembership.put("Rank", myRank);
+            profileMembership.put("ClanID", clan1ID);
+            profileMembership.put("UserID", Profile.userID);
+            clan1Members.put(profileMembership);
+
             firstClan.put("Members",clan1Members);
 
         } catch (JSONException e) {
@@ -381,80 +409,11 @@ public class HTTPLogic {
         return firstClan;
     }
 
+    private static Random rnd = new Random();
 
-    /*
-    public void getDummyClans() {
-        if(Profile.myClans.size() == 0){
-            ArrayList<User> membersClan1 = new ArrayList<User>();
-            membersClan1.add(new User("Henning",2));
-            membersClan1.add(new User("AwesomeJack",6));
-            membersClan1.add(new User("FlackJack",1));
-            membersClan1.add(new User("BlackJack",1));
-            membersClan1.add(new User("GunJack",2));
-            membersClan1.add(new User("PetJack",1));
-            membersClan1.add(new User("SvendJack",3));
-            membersClan1.add(new User("HiJack",3));
-            membersClan1.add(new User("FlackJack",1));
-
-            ArrayList<WallShout> shoutsClan1 = new ArrayList<WallShout>();
-            shoutsClan1.add(new WallShout("last night was awesome",membersClan1.get(7)));
-            shoutsClan1.add(new WallShout("thats what she said ;D",membersClan1.get(2)));
-            shoutsClan1.add(new WallShout("Daayyyyym",membersClan1.get(4)));
-            shoutsClan1.add(new WallShout("pwned",membersClan1.get(6)));
-
-            UUID clanID = UUID.randomUUID();
-
-
-            Clan clan1 = new Clan(Game.COUNTERSTRIKE,4,membersClan1,"The Jacks",
-                    "welcome to the jacks! some very inspiring text that will make you wanna game more",
-                    shoutsClan1 ,clanID);
-
-
-            ArrayList<User> membersClan2 = new ArrayList<User>();
-            membersClan2.add(new User("Preben",2));
-            membersClan2.add(new User("Jakob",1));
-            membersClan2.add(new User("Grete",3));
-            membersClan2.add(new User("Henrik",3));
-            membersClan2.add(new User("Ninjakillaah",6));
-
-            ArrayList<WallShout> shoutsClan2 = new ArrayList<WallShout>();
-            shoutsClan2.add(new WallShout("Es war einmal ein pudelhund",membersClan2.get(3)));
-            shoutsClan2.add(new WallShout("...ein pudelhund",membersClan2.get(2)));
-            shoutsClan2.add(new WallShout("..ein pudelhund",membersClan1.get(4)));
-            shoutsClan2.add(new WallShout("Der war einmal ein pudelhund",membersClan1.get(1)));
-            shoutsClan2.add(new WallShout("ein kleines pudelhund",membersClan1.get(1)));
-
-            UUID clan2ID = UUID.randomUUID();
-
-
-            Clan clan2 = new Clan(Game.DIABLO,1,membersClan2,"Rift Raiders",
-                    "Dagens sang er Es war einmal ein pudelhund",
-                    shoutsClan2 ,clan2ID);
-
-
-            ArrayList<User> membersClan3 = new ArrayList<User>();
-            membersClan3.add(new User("swaezy",2));
-            membersClan3.add(new User("timo",1));
-            membersClan3.add(new User("Kongo",3));
-            membersClan3.add(new User("Lobotomizer",3));
-            membersClan3.add(new User("Ninjakillaah",6));
-
-            ArrayList<WallShout> shoutsClan3 = new ArrayList<WallShout>();
-
-
-            UUID clan3ID = UUID.randomUUID();
-
-
-            Clan clan3 = new Clan(Game.STARCRAFT,6,membersClan3,"Sejler folket",
-                    "kan i heller ikke sove?",
-                    shoutsClan3 ,clan3ID);
-
-            Profile.myClans.add(clan1);
-            Profile.myClans.add(clan2);
-            Profile.myClans.add(clan3);
-        }
+    public static boolean getRandomBoolean() {
+        return rnd.nextBoolean();
     }
-    */
 
 }
 

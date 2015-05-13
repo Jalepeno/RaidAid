@@ -20,7 +20,7 @@ import dk.nicolajpedersen.raidaid.R;
 public class ClanListFragment extends Fragment implements View.OnClickListener{
     ClanArrayAdapter clanAA;
     ButtonFloat btnFloat;
-    boolean timerFinished;
+
 
     // Inflate the view for the fragment based on layout XML
     @Override
@@ -29,10 +29,10 @@ public class ClanListFragment extends Fragment implements View.OnClickListener{
         ListView clanList = (ListView) view.findViewById(R.id.clanListview);
         clanAA = new ClanArrayAdapter(getActivity(),Profile.myClans);
         clanList.setAdapter(clanAA);
+
         btnFloat = (ButtonFloat) view.findViewById(R.id.buttonFloatListClanPage);
         btnFloat.setBackgroundColor(Color.parseColor("#FF9800"));
         btnFloat.setOnClickListener(this);
-        timerFinished =false;
 
         return view;
     }

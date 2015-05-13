@@ -60,7 +60,7 @@ public class Profile {
     public static Clan getClanByID(UUID clanId){
         if(clanId != null){
             for(Clan c : myClans){
-                if(clanId == c.getClanID()){
+                if(clanId.compareTo(c.getClanID())==0){
                     return c;
                 }
             }

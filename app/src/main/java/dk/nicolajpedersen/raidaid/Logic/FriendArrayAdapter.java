@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import dk.nicolajpedersen.raidaid.Data.Friend;
 import dk.nicolajpedersen.raidaid.Data.User;
 import dk.nicolajpedersen.raidaid.R;
+import dk.nicolajpedersen.raidaid.ViewpageFragments.FriendListFragment;
 
 /**
  * Created by Nicolaj on 05-05-2015.
@@ -44,6 +45,9 @@ public class FriendArrayAdapter extends ArrayAdapter<Friend> {
             @Override
             public void onClick(View v) {
                 friends.get(position).setIsInvited(!friends.get(position).isInvited());
+                if (!friends.get(position).isInvited()) {
+                    FriendListFragment.cbMarkAll.setChecked(false);
+                }
             }
         });
 

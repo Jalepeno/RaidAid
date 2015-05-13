@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -12,7 +13,7 @@ import dk.nicolajpedersen.raidaid.Logic.HTTPLogic;
 /**
  * Created by Nicolaj on 13-03-2015.
  */
-public class Clan {
+public class Clan implements Serializable{
     private Game game;
     private int myRank;
     private String clanName,welcomeMessage;

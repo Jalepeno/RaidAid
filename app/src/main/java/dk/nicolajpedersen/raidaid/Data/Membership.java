@@ -3,6 +3,8 @@ package dk.nicolajpedersen.raidaid.Data;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.UUID;
+
 /**
  * Created by Nicolaj on 29-04-2015.
  */
@@ -13,6 +15,25 @@ public class Membership extends User {
 
     public Membership(String userName, String userID) {
         super(userName, userID);
+    }
+
+    public Membership() {
+
+    }
+    public Membership(User theGuy,String clanID){
+        super(theGuy.userName,theGuy.userID);
+        this.clanID = clanID;
+    }
+    public Friend convertToFriend(){
+        Friend thisGuy = new Friend();
+        thisGuy.setUserName(this.getUserName());
+        thisGuy.setUserID(this.getUserID());
+        return thisGuy;
+    }
+    public Friend converToFriendReady(){
+        Friend thisGuy = convertToFriend();
+        thisGuy.setIsInvited(true);
+        return thisGuy;
     }
 
     public int getRank() {

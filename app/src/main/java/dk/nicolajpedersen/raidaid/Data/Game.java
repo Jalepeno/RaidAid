@@ -9,24 +9,50 @@ public enum Game {
 
     public static Game fromInteger(int x) {
         switch(x) {
-            case 0:
-                return COUNTERSTRIKE;
             case 1:
-                return DIABLO;
+                return COUNTERSTRIKE;
             case 2:
-                return DOTA2;
+                return DIABLO;
             case 3:
-                return LEAGUEOFLEGENDS;
+                return DOTA2;
             case 4:
-                return STARCRAFT;
+                return LEAGUEOFLEGENDS;
             case 5:
-                return WORLDOFWARCRAFTHORDE;
+                return STARCRAFT;
             case 6:
-                return WORLDOFWARCRAFTALLIANCE;
-            case 7:
                 return HEROESOFTHESTORM;
+            case 7:
+                return WORLDOFWARCRAFTHORDE;
+            case 8:
+                return WORLDOFWARCRAFTALLIANCE;
+
+            default:
+                return null;
 
         }
-        return null;
+    }
+
+    public static int gameToInt(Game g){
+        switch(g){
+            case COUNTERSTRIKE:
+                return 1;
+            case DIABLO:
+                return 2;
+            case DOTA2:
+                return 3;
+            case LEAGUEOFLEGENDS:
+                return 4;
+            case STARCRAFT:
+                return 5;
+            case HEROESOFTHESTORM:
+                return 6;
+            case WORLDOFWARCRAFTALLIANCE:
+                return 7;
+            case WORLDOFWARCRAFTHORDE:
+                return 8;
+            default:
+                return 0;
+
+        }
     }
 }

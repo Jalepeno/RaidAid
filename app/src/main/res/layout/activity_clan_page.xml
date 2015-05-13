@@ -3,6 +3,7 @@
     xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
     >
     <LinearLayout
         android:layout_width="fill_parent"
@@ -28,12 +29,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <LinearLayout
+                    android:id="@+id/clanBanner"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                >
+
                 <ImageView
                     android:id="@+id/clanGameImage"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minHeight="56dp"
-                />
+                    android:minHeight="40dp"
+                    android:minWidth="40dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_gravity="center_vertical"/>
+
+                    <TextView
+                        android:id="@+id/clanName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Clan Name Here"
+                        android:singleLine="true"
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:textSize="24dp"/>
+
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -51,7 +75,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:padding="4dp"
-                    android:background="#212121"
+                    android:background="?attr/colorPrimaryDark"
                     android:minHeight="100dp"
                     android:textColor="#FFFFFF"
                     android:textSize="20dp"
@@ -61,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="4dp"
                     android:text="Shoutbox:"/>
 
                 <ListView
@@ -71,7 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_marginBottom="8dp"
-                    android:background="#212121"/>
+                    android:background="?attr/colorPrimaryDark"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -85,19 +109,20 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"/>
 
-                    <Button
+                    <com.gc.materialdesign.views.ButtonRectangle
                         android:id="@+id/btnShout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Shout"
-                        android:layout_marginRight="20dp"/>
+                        android:background="?attr/colorAccent"
+                        android:text="Shout!"
+                        android:layout_marginRight="16dp"/>
 
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="16dp"
                     android:layout_marginTop="20dp"
                     android:text="Members:"/>
 
@@ -106,16 +131,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="170dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
                     android:layout_marginTop="5dp"
-                    android:text="Madmax, Huntington, Widemouth, Pringlesteen, Worthmuch, NeverBackDown, BanjoHunter "
                 />
 
             </LinearLayout>
 
         </com.gc.materialdesign.views.ScrollView>
     </LinearLayout>
+
     <com.gc.materialdesign.views.ButtonFloat
         android:id="@+id/buttonFloatClanPage"
         android:layout_width="wrap_content"
@@ -125,6 +150,5 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="24dp"
         android:background="?attr/colorAccent"
-        materialdesign:animate="true"
-        materialdesign:iconDrawable="@drawable/hots_rally" />
+        materialdesign:animate="false"/>
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package dk.nicolajpedersen.raidaid.Logic;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +13,10 @@ import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import dk.nicolajpedersen.raidaid.Activities.ClanPageActivity;
 import dk.nicolajpedersen.raidaid.Data.Clan;
 import dk.nicolajpedersen.raidaid.Data.Game;
 import dk.nicolajpedersen.raidaid.R;
@@ -34,12 +37,12 @@ public class ClanArrayAdapter extends ArrayAdapter<Clan> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.list_element_clan, parent, false);
 
-        Clan thisClan = clans.get(position);
+        final Clan thisClan = clans.get(position);
         TextView clanName = (TextView) rowView.findViewById(R.id.listClanName);
         TextView members = (TextView) rowView.findViewById(R.id.tvClanListMemberCount);
         ImageView gameImg = (ImageView) rowView.findViewById(R.id.gameImageClanList);
@@ -48,6 +51,7 @@ public class ClanArrayAdapter extends ArrayAdapter<Clan> {
         Game thisClanGame = thisClan.getGame();
 
         LinearLayout background = (LinearLayout) rowView.findViewById(R.id.outerLayout);
+
 
 
 
@@ -88,6 +92,18 @@ public class ClanArrayAdapter extends ArrayAdapter<Clan> {
                     background.setBackgroundColor(Color.DKGRAY);
                 break;
         }
+
+        rowView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(context, ClanPageActivity.class);
+                i.putExtra("clanNr",position);
+                context.startActivity(i);
+            }
+        });
+
+
 
         return rowView;
 
