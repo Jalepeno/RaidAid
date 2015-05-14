@@ -52,6 +52,40 @@ public class Appointment{
 
     }
 
+    public String getDateString(){
+        String stringDate="";
+        if(date.get(Calendar.DATE)<10){
+            stringDate +="0"+date.get(Calendar.DATE);
+        }else {
+            stringDate +=+date.get(Calendar.DATE);
+        }
+        stringDate += "/";
+
+        if((date.get(Calendar.MONTH)+1)<10){
+            stringDate +="0"+(date.get(Calendar.MONTH)+1);
+        }else {
+            stringDate +=+(date.get(Calendar.MONTH)+1);
+        }
+        return stringDate;
+    }
+
+    public String getTimeSring(){
+        String timeString ="";
+        if(date.get(Calendar.HOUR_OF_DAY)<10){
+            timeString +="0"+date.get(Calendar.HOUR_OF_DAY);
+        }else {
+            timeString +=+date.get(Calendar.HOUR_OF_DAY);
+        }
+        timeString += ".";
+
+        if(date.get(Calendar.MINUTE)<10){
+            timeString +="0"+date.get(Calendar.MINUTE);
+        }else {
+            timeString +=+date.get(Calendar.MINUTE);
+        }
+        return timeString;
+    }
+
     public boolean isAmIReady() {
         return amIReady;
     }

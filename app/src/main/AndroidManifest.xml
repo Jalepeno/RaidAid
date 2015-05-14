@@ -16,7 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.PageViewActivity" android:label="RaidAid"></activity>
+        <activity android:name=".Activities.PageViewActivity" android:label="RaidAid">
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/viewpage_search" />
+        </activity>
         <activity android:name=".Activities.ClanPageActivity" android:label="RaidAid"></activity>
     </application>
 

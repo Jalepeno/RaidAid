@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- ************************************** -->
+    <!-- ***** Clan related menu options ****** -->
+    <!-- ************************************** -->
+
+
+    <item android:id="@+id/menu_newClan"
+        android:title="Make new Clan"
+        android:orderInCategory="30"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_findClan"
+        android:title="Find existing Clan"
+        android:orderInCategory="50"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_checkInvitesToClan"
+        android:title="Pending invites"
+        android:orderInCategory="75"
+        app:showAsAction="never"/>
+
+
+    <item android:id="@+id/menu_leaveClan"
+        android:title="Leave Clan"
+        android:orderInCategory="80"
+        app:showAsAction="never"/>
+
+
+    <!-- ************************************** -->
+    <!-- **** Friends related menu options **** -->
+    <!-- ************************************** -->
+
+
+
+
+    <item android:title="Add Friend"
+        android:id="@+id/menu_addFriend"
+        android:orderInCategory="50"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_pendingFriends"
+        android:title="Check friendrequests"
+        android:orderInCategory="70"
+        app:showAsAction="never"/>
+
+    <item android:title="Remove Friend"
+        android:id="@+id/menu_removeFriend"
+        android:orderInCategory="90"
+        app:showAsAction="never"/>
+
+
+    <!-- ************************************** -->
+    <!-- ******* Universal menu options ******* -->
+    <!-- ************************************** -->
+
+    <item android:id="@+id/search"
+        android:title="Search"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="collapseActionView|ifRoom"
+        android:orderInCategory="20"
+        android:actionViewClass="android.widget.SearchView" />
+
+    <item android:title="Log out"
+        android:id="@+id/menu_logout"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+</menu>

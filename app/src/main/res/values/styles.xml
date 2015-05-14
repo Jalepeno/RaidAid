@@ -10,8 +10,6 @@
             <item name="colorPrimary">#424242</item>
             <!-- colorPrimaryDark is used for the status bar -->
             <item name="colorPrimaryDark">#212121</item>
-
-
             <item name="android:textColorPrimary">#FF9800</item>
             <item name="android:textColor">#DBDBDB</item>
             <item name="android:textColorSecondary">#EEEEEE</item>
@@ -25,9 +23,20 @@
             <!-- You can also set colorControlNormal, colorControlActivated
                  colorControlHighlight & colorSwitchThumbNormal. -->
 
+
+            <!-- setting a custom style for the options menu -->
+            <item name="actionOverflowMenuStyle">@style/CMOptionsMenu</item>
+
+
             <!-- Deactivates old Actionbar to allow implementation of toolbar -->
             <item name="android:windowNoTitle">true</item>
             <item name="windowActionBar">false</item>
+        </style>
+
+
+        <!-- customizing the options menu-->
+        <style name="CMOptionsMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
+            <item name="android:popupBackground">#424242</item>
         </style>
 
     </resources>

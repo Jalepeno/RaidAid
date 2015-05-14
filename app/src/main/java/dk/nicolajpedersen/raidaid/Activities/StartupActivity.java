@@ -2,14 +2,22 @@ package dk.nicolajpedersen.raidaid.Activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.AttributeSet;
+import android.view.InflateException;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 //import com.splunk.mint.Mint;
+
+import java.util.logging.Handler;
 
 import dk.nicolajpedersen.raidaid.Fragments.LoginFragment;
 import dk.nicolajpedersen.raidaid.Fragments.SignupFragment;
@@ -20,7 +28,7 @@ import dk.nicolajpedersen.raidaid.R;
  * Created by Nicolaj on 14-04-2015.
  */
 
-public class StartupActivity extends FragmentActivity{
+public class StartupActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +37,14 @@ public class StartupActivity extends FragmentActivity{
 
 //       Mint.initAndStartSession(StartupActivity.this, "f309539b");
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             setLoginFragment();
 
             SharedPreferences prefs = getSharedPreferences("RaidAid", MODE_PRIVATE);
             String thisUser = prefs.getString("username", "");
-            String thisPassword = prefs.getString("password","");
-            if(!thisUser.equalsIgnoreCase("")&&!thisPassword.equalsIgnoreCase("")){
-                loginSequence(thisUser,thisPassword);
+            String thisPassword = prefs.getString("password", "");
+            if (!thisUser.equalsIgnoreCase("") && !thisPassword.equalsIgnoreCase("")) {
+                loginSequence(thisUser, thisPassword);
             }
         }
 
@@ -52,7 +60,7 @@ public class StartupActivity extends FragmentActivity{
                 .replace(R.id.frameLayout1, signupFragment).addToBackStack(null).commit();
     }
 
-    public void setLoginFragment(){
+    public void setLoginFragment() {
         LoginFragment loginFragment = new LoginFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frameLayout1, loginFragment).addToBackStack(null).commit();
@@ -62,4 +70,5 @@ public class StartupActivity extends FragmentActivity{
     protected void onDestroy() {
         super.onDestroy();
     }
+
 }

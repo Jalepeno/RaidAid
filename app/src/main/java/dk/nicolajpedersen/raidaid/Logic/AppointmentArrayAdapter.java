@@ -60,8 +60,9 @@ public class AppointmentArrayAdapter extends ArrayAdapter<Appointment> {
         headline.setText(thisAppointment.getHeadline());
         clanName.setText(thisAppointment.getClan().getClanName());
         Game thisAppointGame = thisAppointment.getClan().getGame();
-        tvAppointDate.setText("" + thisAppointment.getDate().get(Calendar.DATE)+"/"+thisAppointment.getDate().get(Calendar.MONTH));
-        tvAppointTime.setText(""+thisAppointment.getDate().get(Calendar.HOUR_OF_DAY)+"."+thisAppointment.getDate().get(Calendar.MINUTE));
+
+        tvAppointDate.setText(thisAppointment.getDateString());
+        tvAppointTime.setText(thisAppointment.getTimeSring());
         switch (thisAppointGame){
             case COUNTERSTRIKE:
                 background.setBackgroundResource(R.drawable.background_cs); //R.drawable. - some couterstringe image
@@ -118,8 +119,7 @@ public class AppointmentArrayAdapter extends ArrayAdapter<Appointment> {
             public void onClick(View v) {
                 if (v == imReady) {
                     thisAppointment.setAmIReady(imReady.isChecked());
-                    Friend me = thisAppointment.getMe();
-                    me.setIsInvited(thisAppointment.isAmIReady());
+                    thisAppointment.getMe().setIsInvited(thisAppointment.isAmIReady());
                     notifyDataSetChanged();
                 }
             }
@@ -141,7 +141,10 @@ public class AppointmentArrayAdapter extends ArrayAdapter<Appointment> {
             }
         });
 
+
         return rowView;
 
     }
+
+
 }

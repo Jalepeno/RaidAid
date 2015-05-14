@@ -29,6 +29,7 @@ import dk.nicolajpedersen.raidaid.R;
  * Created by Nicolaj on 08-04-2015.
  */
 public class ClanPageActivity extends ActionBarActivity implements View.OnClickListener{
+
     private ListView lvShout;
     private TextView tvMessageOfDay, tvClanName, tvMemberCloud;
     private ButtonRectangle btnShout;
