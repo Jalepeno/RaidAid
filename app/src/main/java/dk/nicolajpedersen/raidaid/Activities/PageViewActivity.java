@@ -1,5 +1,8 @@
 package dk.nicolajpedersen.raidaid.Activities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
@@ -104,6 +107,23 @@ public class PageViewActivity extends ActionBarActivity{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_logout:
+                SharedPreferences sharedPreferences = getSharedPreferences("RaidAid", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.commit();
+                Intent i = new Intent(this,StartupActivity.class);
+                startActivity(i);
+                finish();
+                break;
+
+        }
         return false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

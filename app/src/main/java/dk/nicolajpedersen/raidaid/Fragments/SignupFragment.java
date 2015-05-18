@@ -2,6 +2,7 @@ package dk.nicolajpedersen.raidaid.Fragments;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gc.materialdesign.views.ButtonFlat;
+
 import dk.nicolajpedersen.raidaid.Activities.StartupActivity;
 import dk.nicolajpedersen.raidaid.Logic.HTTPLogic;
 import dk.nicolajpedersen.raidaid.R;
@@ -24,7 +27,7 @@ import dk.nicolajpedersen.raidaid.R;
  */
 public class SignupFragment extends Fragment implements View.OnClickListener{
     EditText newUserName,newPassword1,newPassword2;
-    Button btnSign;
+    ButtonFlat btnSign;
     CheckBox terms;
     TextView seeTerms;
 
@@ -34,7 +37,8 @@ public class SignupFragment extends Fragment implements View.OnClickListener{
         newUserName = (EditText) signupView.findViewById(R.id.etNewUserName);
         newPassword1 = (EditText) signupView.findViewById(R.id.etNewPassword1);
         newPassword2  = (EditText) signupView.findViewById(R.id.etNewPassword2);
-        btnSign = (Button) signupView.findViewById(R.id.btnSignUp);
+        btnSign = (ButtonFlat) signupView.findViewById(R.id.btn_signup);
+        btnSign.setBackgroundColor(Color.parseColor("#FF9800"));
         terms =(CheckBox) signupView.findViewById(R.id.cbTerms);
         seeTerms =(TextView) signupView.findViewById(R.id.tvTerms);
         seeTerms.setOnClickListener(this);
@@ -54,7 +58,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener{
                     // delay here for internet communication
 
                     if(signupsucess == 1){
-                        ((StartupActivity)getActivity()).setLoginFragment();
+                        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
                     }else{
                         Context context = getActivity().getApplicationContext();
                         CharSequence text = "signup failed miserably!";

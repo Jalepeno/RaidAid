@@ -39,7 +39,9 @@ public class Appointment{
             for(int i=0;i< readyList.length();i++){
                 Friend f = new Friend(readyList.getJSONObject(i));
                 inviteList.add(f);
-                if(f.userID.contentEquals(Profile.userID)){
+                // looking through the invite list for myself
+                if(f.userID.compareTo(Profile.userID)==0){
+                    // check for my own readiness
                     amIReady = f.isInvited();
 
                 }
@@ -110,7 +112,6 @@ public class Appointment{
         this.date = date;
     }
 
-
     public Clan getClan() {
         return clan;
     }
@@ -122,7 +123,6 @@ public class Appointment{
     public ArrayList<Friend> getInviteList() {
         return inviteList;
     }
-
 
     public String getHeadline() {
         return headline;
@@ -152,7 +152,7 @@ public class Appointment{
 
     public Friend getMe(){
         for(Friend f :inviteList){
-            if(f.userID.contentEquals(Profile.userID)){
+            if(f.userID.compareTo(Profile.userID)==0){
                 return f;
             }
         }

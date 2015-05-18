@@ -58,6 +58,15 @@ public class Clan implements Serializable{
         this.clanID = clanID;
     }
 
+    public Membership getMemberByID(UUID memberID){
+        for(Membership m : members){
+            if(m.userID.compareTo(memberID)==0){
+                return m;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<WallShout> getShoutsFromJSON(JSONArray wallShouts){
         if(wallShouts != null){
         ArrayList<WallShout> returnShouts = new ArrayList<>();
@@ -103,6 +112,10 @@ public class Clan implements Serializable{
 
 
         return null;
+    }
+
+    public void addShoutToWall (String message){
+        shouts.add(new WallShout(message,getMemberByID(Profile.userID)));
     }
 
 
@@ -159,6 +172,10 @@ public class Clan implements Serializable{
             HTTPLogic httpLogic=new HTTPLogic();
         }
         return isSuccess;
+    }
+
+    public int getMyRank() {
+        return myRank;
     }
 
     public ArrayList<WallShout> getShouts() {

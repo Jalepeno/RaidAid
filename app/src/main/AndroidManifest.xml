@@ -21,6 +21,7 @@
                 android:resource="@xml/viewpage_search" />
         </activity>
         <activity android:name=".Activities.ClanPageActivity" android:label="RaidAid"></activity>
+        <activity android:name=".Activities.RaidAidLoginSplash"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

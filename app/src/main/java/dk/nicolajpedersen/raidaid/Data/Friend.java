@@ -11,6 +11,12 @@ public class Friend extends User {
 
     private boolean isInvited;
 
+    /*
+    The friend object serves two puposes, it fills the firendlist, and
+    allows you to select who to invite.
+    since this is a user with an added boolean value, it also serves as
+    an appointment invite.
+     */
     public Friend(JSONObject jsonObject) {
         super(jsonObject);
         try{

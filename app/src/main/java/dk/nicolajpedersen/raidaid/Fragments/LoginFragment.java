@@ -1,7 +1,5 @@
 package dk.nicolajpedersen.raidaid.Fragments;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -11,22 +9,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.gc.materialdesign.views.ButtonFlat;
-import com.gc.materialdesign.views.ButtonRectangle;
 
 import java.util.ArrayList;
 
 import dk.nicolajpedersen.raidaid.Activities.PageViewActivity;
+import dk.nicolajpedersen.raidaid.Activities.RaidAidLoginSplash;
 import dk.nicolajpedersen.raidaid.Activities.StartupActivity;
 import dk.nicolajpedersen.raidaid.Data.Appointment;
 import dk.nicolajpedersen.raidaid.Data.Clan;
 import dk.nicolajpedersen.raidaid.Data.Friend;
 import dk.nicolajpedersen.raidaid.Data.Profile;
-import dk.nicolajpedersen.raidaid.Data.User;
 import dk.nicolajpedersen.raidaid.Logic.HTTPLogic;
 import dk.nicolajpedersen.raidaid.R;
 
@@ -56,8 +51,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         signup.setOnClickListener(this);
         login.setOnClickListener(this);
 
-        sharedPreferences = getActivity().getSharedPreferences("RaidAidPrefs", Context.MODE_PRIVATE);
-
         return loginView;
     }
 
@@ -74,41 +67,21 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             httpLogic.getDummyProfile(username.getText().toString(), password.getText().toString(), getActivity());
 
             getActivity().finish();
-            Intent i = new Intent(getActivity()
-                    .getApplicationContext(), PageViewActivity.class);
+
+
+
+//            Intent i = new Intent(getActivity().getApplicationContext(), PageViewActivity.class);
+//            startActivity(i);
+
+            // login splash sequence,
+            Intent i = new Intent(getActivity().getApplicationContext(), RaidAidLoginSplash.class);
+            Bundle b = new Bundle();
+            b.putString("Username", username.getText().toString());
+            b.putString("Password", password.getText().toString());
+            i.putExtras(b);
             startActivity(i);
 
 
-            //login session
-/*
-            HTTPLogic httpLogic = new HTTPLogic();
-            int didStuffHappen = httpLogic.getProfileByLogin(username.getText().toString(), password.getText().toString(), getActivity().getApplicationContext());
-
-
-            // if login successful
-            if(didStuffHappen == 1){
-
-                // save login valuables
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("username",username.getText().toString());
-                editor.putString("password",password.getText().toString());
-                editor.commit();
-
-                // change activity.
-                Intent i = new Intent(getActivity()
-                        .getApplicationContext(), PageViewActivity.class);
-                startActivity(i);
-
-            }else{
-
-                // make toast to inform of bad login
-                Context context = getActivity().getApplicationContext();
-                CharSequence text = "Your username and password did not match";
-                Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-                toast.show();
-            }
-
-*/
         }else if(v == signup){
             ((StartupActivity)getActivity()).setSignupFragment();
         }

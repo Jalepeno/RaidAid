@@ -1,52 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#212121"
+    >
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select your username"
+        android:textColor="#8e8e8e"
         android:id="@+id/textView5"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="left" />
 
     <EditText
+        android:id="@+id/etNewUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/etNewUserName"
-        android:layout_gravity="center_horizontal" />
+        android:singleLine="true"
+        android:maxLength="25"
+        android:inputType="textFilter"
+        android:textColor="#FFFFFF"
+        android:digits="@string/myAlphaNumeric"
+
+        android:layout_gravity="left"
+        android:hint="      (3-25 chars)"
+        android:textColorHint="#626262"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#8e8e8e"
         android:id="@+id/textView6"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="left"
         android:text="type your password" />
 
     <EditText
+        android:id="@+id/etNewPassword1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/etNewPassword1"
-        android:layout_gravity="center_horizontal" />
+        android:maxLength="25"
+        android:textColor="#FFFFFF"
+        android:hint="      (7-25 chars)"
+        android:textColorHint="#626262"
+        android:singleLine="true"
+
+        android:layout_gravity="left" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Confirm your password"
+        android:layout_marginTop="8dp"
+        android:textColor="#8e8e8e"
         android:id="@+id/textView7"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="left" />
 
     <EditText
+        android:id="@+id/etNewPassword2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/etNewPassword2"
-        android:layout_gravity="center_horizontal" />
+        android:maxLength="25"
+        android:textColor="#FFFFFF"
+        android:hint="      (7-25 chars)"
+        android:textColorHint="#626262"
+        android:singleLine="true"
+        android:layout_gravity="left" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -59,28 +91,31 @@
             android:id="@+id/cbTerms"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="You accept these "
+            android:textColor="#FFFFFF"
             android:layout_gravity="right"
             android:checked="false" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="You accept these "
-            android:id="@+id/textView8" />
 
         <TextView
             android:id="@+id/tvTerms"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="?attr/colorAccent"
             android:text="@string/clickable_terms_string"
             android:clickable="true"
             />
     </LinearLayout>
 
-    <Button
+    <com.gc.materialdesign.views.ButtonFlat
+        android:id="@+id/btn_signup"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign Up"
-        android:id="@+id/btnSignUp"
+        android:minWidth="72dp"
+        android:layout_height="48dp"
+        android:text="Sign up"
+        android:layout_marginTop="10dp"
+        android:padding="12dp"
+        android:background="?attr/colorAccent"
         android:layout_gravity="center_horizontal" />
-</LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

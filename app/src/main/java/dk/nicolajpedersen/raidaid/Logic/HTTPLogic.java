@@ -51,8 +51,12 @@ public class HTTPLogic {
     public HTTPLogic(){
 
     }
+    public static AsyncHttpClient getClient(){
+        AsyncHttpClient client  = new AsyncHttpClient();
+        return client;
+    }
 
-    public int getProfileByLogin(final String username, final String password, final Context context){
+    public static int getProfileByLogin(final String username, final String password, final Context context){
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("Usename", username);
@@ -69,9 +73,6 @@ public class HTTPLogic {
 
             StringEntity entity = new StringEntity(loginModel.toString());
             entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-            final ProgressDialog dialog = new ProgressDialog(context);
-            dialog.setMessage("Logging you in..");
-            dialog.show();
 
             client.post(context, getLoginUrl(), entity, "application/json", new JsonHttpResponseHandler() {
 
@@ -81,26 +82,18 @@ public class HTTPLogic {
                     Profile profile = new Profile(response);
                     if (profile.userID.equals(UUID.fromString("00000000-0000-0000-0000-000000000000"))) {
                         // login failed
-                        CharSequence text = "Login failed";
-                        Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-                        toast.show();
-                        isSuccess[0] = 0;
+
+                        isSuccess[0] = 2;
                     } else {
                         // login success
                         //upon success save credentials in sharedPreferences.
-                        SharedPreferences.Editor editor = context.getSharedPreferences("RaidAidPrefs", Context.MODE_PRIVATE).edit();
-                        editor.putString("Username", username);
-                        editor.putString("UserID", profile.userID);
-                        editor.putString("UserPassword", password);
-                        editor.commit();
                         isSuccess[0] = 1;
 
                         // start getting extra information once login has been confirmed.
-                        getClansByLogin(context, username, password);
-                        getFriendsByLogin(context, username, password);
+                        getClansByLogin( username, password);
+                        getFriendsByLogin( username, password);
 
                     }
-                    dialog.dismiss();
                 }
 
                 @Override
@@ -110,9 +103,8 @@ public class HTTPLogic {
                                       JSONObject errorResponse) {
 
 //                    login failed
-                    isSuccess[0] = 0;
+                    isSuccess[0] = 2;
                     throwable.printStackTrace();
-                    dialog.dismiss();
                 }
 
             });
@@ -129,11 +121,11 @@ public class HTTPLogic {
     }
 
 
-    public void getClansByLogin(Context context, String username,String password){
+    public static void getClansByLogin(String username, String password){
         AsyncHttpClient client = getLogInClient(username,password);
 
         try{
-            client.get(context, getClanUrl(), new JsonHttpResponseHandler() {
+            client.get(getClanUrl(), new JsonHttpResponseHandler() {
                 // When the response returned by REST has Http response code '200'
                 @Override
                 public void onSuccess(int i, Header[] headers, JSONArray response) {
@@ -148,9 +140,7 @@ public class HTTPLogic {
                     for (Clan c : Profile.myClans) {
                         System.out.println(c.getClanName());
                     }
-
                 }
-
                 @Override
                 public void onFailure(int statusCode,
                                       Header[] headers,
@@ -166,11 +156,11 @@ public class HTTPLogic {
 
     }
 
-    public  void getFriendsByLogin(Context context, String username, String password){
+    public static void getFriendsByLogin(String username, String password){
         AsyncHttpClient client  = getLogInClient(username,password);
 
         try{
-            client.get(context,getProfileFriendsUrl(),new JsonHttpResponseHandler(){
+            client.get(getProfileFriendsUrl(),new JsonHttpResponseHandler(){
                 // When the response returned by REST has Http response code '200'
                 @Override
                 public void onSuccess(int i, Header[] headers, JSONArray response) {
@@ -186,7 +176,6 @@ public class HTTPLogic {
                     for (User u : Profile.myFriends) {
                         System.out.println(u.getUserName());
                     }
-
                 }
 
                 @Override
@@ -204,7 +193,7 @@ public class HTTPLogic {
 
     }
 
-    private AsyncHttpClient getLogInClient(String username,String password){
+    private static AsyncHttpClient getLogInClient(String username,String password){
         AsyncHttpClient client  = new AsyncHttpClient();
         String auth = username+":"+password;
         String encodedAuth = Base64.encodeToString(auth.getBytes(),Base64.DEFAULT);
@@ -215,6 +204,10 @@ public class HTTPLogic {
     }
 
     public void sendShout(UUID clanID, String text) {
+    }
+
+    public void getClanShouts(UUID clanID) {
+
     }
 
     public int getFriendList() {
@@ -232,25 +225,34 @@ public class HTTPLogic {
     public int postSignup() {
         return 1;
     }
-    private String getLoginUrl() {
+
+
+    public static String getLoginUrl() {
         return "http://nicolajpedersen.dk/api/persons/login";
     }
-    private String getClanUrl() {
+    public static String getClanUrl() {
         return "http://nicolajpedersen.dk/api/clans";
     }
-    private String getProfileFriendsUrl() {
+    public static String getProfileFriendsUrl() {
         return "http://nicolajpedersen.dk/api/persons";
     }
-    private String getEventUrl(){return "http://nicolajpedersen.dk/events";}
+    public static String getEventUrl(){return "http://nicolajpedersen.dk/events";}
 
 
-    public void getDummyProfile(String username, String password, Context context){
+
+
+
+
+
+
+    public static int getDummyProfile(String username, String password, Context context){
+        int success = 0;
         Profile.username = username;
         Profile.password = password;
-        Profile.userID = UUID.randomUUID().toString();
+        Profile.userID = UUID.randomUUID();
         SharedPreferences.Editor editor = context.getSharedPreferences("RaidAidPrefs",Context.MODE_PRIVATE).edit();
         editor.putString("Username", username);
-        editor.putString("UserID", Profile.userID);
+        editor.putString("UserID", Profile.userID.toString());
         editor.putString("UserPassword", password);
         editor.commit();
 
@@ -260,10 +262,11 @@ public class HTTPLogic {
         getDummyAppointments();
 
         System.out.println("Profile completed");
-
+        success =1;
+        return success;
     }
 
-    private void getDummyAppointments() {
+    private static void getDummyAppointments() {
         if(Profile.myAppointments != null){
             Profile.myAppointments.clear();
         }
@@ -274,7 +277,7 @@ public class HTTPLogic {
         Profile.myAppointments.add(new Appointment(makeDummyAppointment(2,"MC Raid","Its time for some more molten core.. dips on thunderfury")));
         Profile.myAppointments.add(new Appointment(makeDummyAppointment(2,"MC Raid","Its time for some more molten core.. dips on thunderfury")));
         Profile.myAppointments.add(new Appointment(makeDummyAppointment(2,"Black Rock Spire","epic loot is under way.. please dont jenkins this up")));
-        Profile.myAppointments.add(new Appointment(makeDummyAppointment(0,"PWC vs Abehatterne","er i klar til at kaste med bananer?")));
+        Profile.myAppointments.add(new Appointment(makeDummyAppointment(0,"PCW vs Abehatterne","er i klar til at kaste med bananer?")));
         Profile.myAppointments.add(new Appointment(makeDummyAppointment(3,"Epic Lan party","it aint over untill a mom brings the toilet to you")));
         Profile.myAppointments.add(new Appointment(makeDummyAppointment(1,"some turnament","yay guys.. we shall win this one")));
         Profile.myAppointments.add(new Appointment(makeDummyAppointment(2, "more turnaments", "please refrain all things from carrot")));
@@ -288,7 +291,7 @@ public class HTTPLogic {
 
 
     }
-    private JSONObject makeDummyAppointment(int clan, String eventName,String evenDesript){
+    private static JSONObject makeDummyAppointment(int clan, String eventName,String evenDesript){
 
         JSONObject returnAppointment = new JSONObject();
         long offsetday = ((long)1000*60*60*24*((long)(Math.random()*28.0)));
@@ -323,7 +326,7 @@ public class HTTPLogic {
         return returnAppointment;
     }
 
-    private void getDummyFriends() {
+    private static void getDummyFriends() {
         String[] friends = new String[]{
                 "Bly","Happy","KingKong","Arthur","Prebs","soul","RiSK","MaFia","WhiteRa",
                 "Demuslim","MarieKingPrime","Bunny","MMA","herO","Dark","Maru","Zest","Life",
@@ -338,13 +341,13 @@ public class HTTPLogic {
         for(String s:friends){
             Friend friend = new Friend();
             friend.setUserName(s);
-            friend.setUserID(UUID.randomUUID().toString());
+            friend.setUserID(UUID.randomUUID());
             Profile.myFriends.add(friend);
         }
 
     }
 
-    private void getDummyClans() {
+    private static void getDummyClans() {
 
         String[] clan1Members = new String[]{"robert","Gator","Pipsqueach","Bawser","Smeeth","Clayn"};
         Clan clan1 = new Clan(makeDummyClans("TestClan1",clan1Members));
@@ -370,7 +373,7 @@ public class HTTPLogic {
 
     }
 
-    private JSONObject makeDummyClans(String clanName,String[] members){
+    private static JSONObject makeDummyClans(String clanName,String[] members){
         JSONObject firstClan = new JSONObject();
         String clan1ID=UUID.randomUUID().toString();
         JSONArray clan1Members = new JSONArray();
@@ -381,7 +384,7 @@ public class HTTPLogic {
             int myRank =((int)((float)Math.random()*5.2))+1;
             firstClan.put("MyRank",myRank);
             firstClan.put("ClanID",clan1ID);
-            firstClan.put("MessageOfDay","Hello "+clanName);
+            firstClan.put("MessageOfDay","Hello "+clanName+"\nYour rank is "+myRank);
             firstClan.put("ClanName",clanName);
 
             for(String s:members){
@@ -414,6 +417,7 @@ public class HTTPLogic {
     public static boolean getRandomBoolean() {
         return rnd.nextBoolean();
     }
+
 
 }
 

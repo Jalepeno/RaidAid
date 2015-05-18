@@ -30,24 +30,28 @@ import dk.nicolajpedersen.raidaid.R;
 
 public class StartupActivity extends FragmentActivity {
 
+    FrameLayout layout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment_holder);
+        layout = (FrameLayout) findViewById(R.id.frameLayout1);
 
 //       Mint.initAndStartSession(StartupActivity.this, "f309539b");
 
         if (savedInstanceState == null) {
-            setLoginFragment();
+
 
             SharedPreferences prefs = getSharedPreferences("RaidAid", MODE_PRIVATE);
-            String thisUser = prefs.getString("username", "");
-            String thisPassword = prefs.getString("password", "");
+            String thisUser = prefs.getString("Username", "");
+            String thisPassword = prefs.getString("Password", "");
             if (!thisUser.equalsIgnoreCase("") && !thisPassword.equalsIgnoreCase("")) {
                 loginSequence(thisUser, thisPassword);
             }
         }
-
+        LoginFragment loginFragment = new LoginFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(layout.getId(), loginFragment).commit();
 
     }
 
@@ -57,14 +61,9 @@ public class StartupActivity extends FragmentActivity {
     public void setSignupFragment() {
         SignupFragment signupFragment = new SignupFragment();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frameLayout1, signupFragment).addToBackStack(null).commit();
+                .replace(layout.getId(), signupFragment).addToBackStack(null).commit();
     }
 
-    public void setLoginFragment() {
-        LoginFragment loginFragment = new LoginFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frameLayout1, loginFragment).addToBackStack(null).commit();
-    }
 
     @Override
     protected void onDestroy() {

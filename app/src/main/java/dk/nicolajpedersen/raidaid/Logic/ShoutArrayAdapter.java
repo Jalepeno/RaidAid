@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import dk.nicolajpedersen.raidaid.Data.Clan;
 import dk.nicolajpedersen.raidaid.Data.Membership;
 import dk.nicolajpedersen.raidaid.Data.WallShout;
 import dk.nicolajpedersen.raidaid.R;
@@ -18,16 +20,20 @@ import dk.nicolajpedersen.raidaid.R;
  */
 public class ShoutArrayAdapter extends ArrayAdapter<WallShout> {
     private final Context context;
+    private Clan clan;
     private ArrayList<WallShout> shouts;
 
-    public ShoutArrayAdapter(Context context, ArrayList<WallShout> shouts) {
-        super(context, R.layout.list_element_shout, shouts);
+    public ShoutArrayAdapter(Context context,Clan clan) {
+        super(context, R.layout.list_element_shout, clan.getShouts());
         this.context = context;
-        this.shouts=shouts;
+        this.clan = clan;
+        this.shouts=clan.getShouts();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -36,7 +42,7 @@ public class ShoutArrayAdapter extends ArrayAdapter<WallShout> {
         TextView tvName = (TextView) rowView.findViewById(R.id.tvShoutName);
         ImageView imgRank = (ImageView) rowView.findViewById(R.id.imgShoutRank);
 
-        WallShout thisShout = shouts.get(position);
+        WallShout thisShout = shouts.get(shouts.size()-position-1);
         Membership thisGuy = thisShout.getMember();
 
         if(thisGuy != null) {
@@ -65,6 +71,8 @@ public class ShoutArrayAdapter extends ArrayAdapter<WallShout> {
         }else{
             imgRank.setImageResource(R.drawable.rank0);
         }
+
+
         return rowView;
     }
 }

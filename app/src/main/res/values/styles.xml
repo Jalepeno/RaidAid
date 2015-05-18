@@ -19,13 +19,15 @@
                  which is used to tint widgets -->
             <item name="colorAccent">#FF9800</item>
 
-
             <!-- You can also set colorControlNormal, colorControlActivated
                  colorControlHighlight & colorSwitchThumbNormal. -->
 
 
             <!-- setting a custom style for the options menu -->
-            <item name="actionOverflowMenuStyle">@style/CMOptionsMenu</item>
+            <item name="actionOverflowMenuStyle">@style/RaidAidOptionsMenu</item>
+            <item name="android:actionMenuTextColor">@drawable/menu_text_colors</item>
+            <item name="android:titleTextStyle">@style/TitleTextStyle</item>
+
 
 
             <!-- Deactivates old Actionbar to allow implementation of toolbar -->
@@ -35,9 +37,16 @@
 
 
         <!-- customizing the options menu-->
-        <style name="CMOptionsMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <style name="RaidAidOptionsMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
             <item name="android:popupBackground">#424242</item>
+            <item name="android:textColor">@drawable/menu_text_colors</item>
         </style>
+
+        <style name="TitleTextStyle"
+            parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+            <item name="android:textColor">@drawable/menu_text_colors</item>
+        </style>
+
 
     </resources>
 

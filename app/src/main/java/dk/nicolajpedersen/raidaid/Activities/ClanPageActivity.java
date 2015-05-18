@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,7 +36,8 @@ public class ClanPageActivity extends ActionBarActivity implements View.OnClickL
     private ButtonRectangle btnShout;
     private ButtonFloat btnInvite;
     private ImageView clanGameImg;
-    private  LinearLayout clanBanner;
+    private LinearLayout clanBanner;
+    private int myRank;
     private Clan clan;
     private EditText etShout;
     private HTTPLogic httpLogic;
@@ -55,6 +57,7 @@ public class ClanPageActivity extends ActionBarActivity implements View.OnClickL
 
 
         clan = Profile.myClans.get(getIntent().getIntExtra("clanNr",0));
+        myRank = clan.getMyRank();
 
         //setting up message of the day
         tvMessageOfDay = (TextView) findViewById(R.id.tvMessageOfDay);
@@ -65,12 +68,27 @@ public class ClanPageActivity extends ActionBarActivity implements View.OnClickL
         tvClanName = (TextView) findViewById(R.id.clanName);
         tvClanName.setText(clan.getClanName());
         clanGameImg = (ImageView) findViewById(R.id.clanGameImage);
+        findViewById(R.id.scroll).requestFocus();
 
 
         //filling shout wall
+        httpLogic.getClanShouts(clan.getClanID());
         lvShout = (ListView) findViewById(R.id.listviewShoutbox);
-        sAA = new ShoutArrayAdapter(this.getApplicationContext(),clan.getShouts());
+        sAA = new ShoutArrayAdapter(this,clan);
         lvShout.setAdapter(sAA);
+        lvShout.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
+
+
+
 
         tvMemberCloud = (TextView) findViewById(R.id.tvClanMembers);
         tvMemberCloud.setText(Html.fromHtml(fillCloud()));
@@ -81,7 +99,7 @@ public class ClanPageActivity extends ActionBarActivity implements View.OnClickL
         btnShout = (ButtonRectangle) findViewById(R.id.btnShout);
         btnShout.setBackgroundColor(Color.parseColor("#FF9800"));
         etShout =(EditText) findViewById(R.id.etShoutText);
-        etShout.setFocusable(false);
+
         btnShout.setOnClickListener(this);
         btnInvite.setOnClickListener(this);
 
@@ -195,11 +213,39 @@ public class ClanPageActivity extends ActionBarActivity implements View.OnClickL
             case R.id.menu_kickPlayer:
                 kickPlayer();
                 break;
+            case R.id.menu_leaveClan:
+                leaveClan();
             default:
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if(myRank < 4){
+            menu.findItem(R.id.invitePlayer).setEnabled(false);
+            System.out.println("invitePlayer shound be black");
+            menu.findItem(R.id.PromotePlayer).setEnabled(false);
+            System.out.println("PromotePlayer shound be black");
+        }
+        if(myRank < 5) {
+            menu.findItem(R.id.menu_msgOfDay).setEnabled(false);
+            System.out.println("menu_msgOfDay shound be black");
+            menu.findItem(R.id.menu_AppointMan).setEnabled(false);
+            System.out.println("menu_AppointMan shound be black");
+            menu.findItem(R.id.menu_kickPlayer).setEnabled(false);
+            System.out.println("menu_kickPlayer shound be black");
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    private void leaveClan() {
+        // are you sure diaolog ?
+    }
+
 
     private void getAppointmentManager() {
 
@@ -227,7 +273,11 @@ public class ClanPageActivity extends ActionBarActivity implements View.OnClickL
         if(v == btnInvite){
             // Open dialog box for invite text
         }else if(v == btnShout){
-            httpLogic.sendShout(clan.getClanID(),etShout.getText().toString());
+            httpLogic.sendShout(clan.getClanID(), etShout.getText().toString());
+            clan.addShoutToWall(etShout.getText().toString());
+            sAA.notifyDataSetChanged();
+            etShout.setText("");
+
         }
 
     }

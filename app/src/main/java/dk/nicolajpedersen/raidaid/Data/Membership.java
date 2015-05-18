@@ -13,7 +13,7 @@ public class Membership extends User {
     String clanID;
 
 
-    public Membership(String userName, String userID) {
+    public Membership(String userName, UUID userID) {
         super(userName, userID);
     }
 

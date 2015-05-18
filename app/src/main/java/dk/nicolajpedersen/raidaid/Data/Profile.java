@@ -14,7 +14,7 @@ public class Profile {
     public static ArrayList<Appointment> myAppointments;
     public static ArrayList<Friend> myFriends;
     public static String username, password;
-    public static String userID;
+    public static UUID userID;
 
 
     public Profile(JSONObject loginObject) {
