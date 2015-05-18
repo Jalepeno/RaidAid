@@ -10,25 +10,23 @@
             <item name="colorPrimary">#424242</item>
             <!-- colorPrimaryDark is used for the status bar -->
             <item name="colorPrimaryDark">#212121</item>
-            <item name="android:textColorPrimary">#FF9800</item>
+            <item name="android:textColorPrimary">@color/Accent</item>
             <item name="android:textColor">#DBDBDB</item>
             <item name="android:textColorSecondary">#EEEEEE</item>
 
 
             <!-- colorAccent is used as the default value for colorControlActivated
                  which is used to tint widgets -->
-            <item name="colorAccent">#FF9800</item>
+            <item name="colorAccent">@color/Accent</item>
 
             <!-- You can also set colorControlNormal, colorControlActivated
                  colorControlHighlight & colorSwitchThumbNormal. -->
 
-
             <!-- setting a custom style for the options menu -->
             <item name="actionOverflowMenuStyle">@style/RaidAidOptionsMenu</item>
+            <item name="android:dialogLayout">@style/RaidAidOptionsMenu</item>
             <item name="android:actionMenuTextColor">@drawable/menu_text_colors</item>
             <item name="android:titleTextStyle">@style/TitleTextStyle</item>
-
-
 
             <!-- Deactivates old Actionbar to allow implementation of toolbar -->
             <item name="android:windowNoTitle">true</item>
@@ -47,6 +45,20 @@
             <item name="android:textColor">@drawable/menu_text_colors</item>
         </style>
 
+
+        <style name="RaidAidDialog" parent="Theme.AppCompat.Dialog">
+            <item name="colorPrimaryDark">@color/Primary</item>
+            <item name="colorPrimary">@color/Primary</item>
+            <item name="colorAccent">@color/Accent</item>
+            <item name="android:width">@dimen/abc_action_bar_stacked_tab_max_width</item>
+            <item name="android:title">@style/RaidAidTitle</item>
+        </style>
+
+        <style name="RaidAidTitle" parent="android:TextAppearance">
+            <item name="android:textSize">25dp</item>
+            <item name="android:color">@color/Accent</item>
+
+        </style>
 
     </resources>
 

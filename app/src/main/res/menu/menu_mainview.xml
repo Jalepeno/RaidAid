@@ -24,12 +24,6 @@
         app:showAsAction="never"/>
 
 
-    <item android:id="@+id/menu_leaveClan"
-        android:title="Leave Clan"
-        android:orderInCategory="80"
-        app:showAsAction="never"/>
-
-
     <!-- ************************************** -->
     <!-- **** Friends related menu options **** -->
     <!-- ************************************** -->

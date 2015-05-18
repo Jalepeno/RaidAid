@@ -3,12 +3,13 @@ package dk.nicolajpedersen.raidaid.Data;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Comparator;
 import java.util.UUID;
 
 /**
  * Created by Nicolaj on 29-04-2015.
  */
-public class Membership extends User {
+public class Membership extends User implements Comparator<Membership>{
     int rank;
     String clanID;
 
@@ -54,5 +55,13 @@ public class Membership extends User {
         }
 
 
+    }
+
+    @Override
+    public int compare(Membership lhs, Membership rhs) {
+        if(lhs.getRank()>rhs.getRank()){return 1;
+        }else if(lhs.getRank()<rhs.getRank()) {
+            return -1;
+        }else return lhs.getUserName().compareTo(rhs.getUserName());
     }
 }

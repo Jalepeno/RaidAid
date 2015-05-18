@@ -72,7 +72,7 @@ public class PageViewActivity extends ActionBarActivity{
                 menu.findItem(R.id.menu_newClan).setVisible(true);
                 menu.findItem(R.id.menu_findClan).setVisible(true);
                 menu.findItem(R.id.menu_checkInvitesToClan).setVisible(true);
-                menu.findItem(R.id.menu_leaveClan).setVisible(true);
+
 
                 menu.findItem(R.id.menu_addFriend).setVisible(false);
                 menu.findItem(R.id.menu_pendingFriends).setVisible(false);
@@ -83,7 +83,7 @@ public class PageViewActivity extends ActionBarActivity{
                 menu.findItem(R.id.menu_newClan).setVisible(false);
                 menu.findItem(R.id.menu_findClan).setVisible(false);
                 menu.findItem(R.id.menu_checkInvitesToClan).setVisible(false);
-                menu.findItem(R.id.menu_leaveClan).setVisible(false);
+
 
 
                 menu.findItem(R.id.menu_addFriend).setVisible(true);
@@ -94,7 +94,7 @@ public class PageViewActivity extends ActionBarActivity{
                 menu.findItem(R.id.menu_newClan).setVisible(false);
                 menu.findItem(R.id.menu_findClan).setVisible(false);
                 menu.findItem(R.id.menu_checkInvitesToClan).setVisible(false);
-                menu.findItem(R.id.menu_leaveClan).setVisible(false);
+
 
                 menu.findItem(R.id.menu_addFriend).setVisible(false);
                 menu.findItem(R.id.menu_pendingFriends).setVisible(false);

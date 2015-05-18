@@ -1,8 +1,10 @@
 package dk.nicolajpedersen.raidaid.Activities;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -15,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gc.materialdesign.views.ButtonFloat;
 import com.gc.materialdesign.views.ButtonRectangle;
@@ -22,6 +25,8 @@ import com.gc.materialdesign.views.ButtonRectangle;
 import dk.nicolajpedersen.raidaid.Data.Clan;
 import dk.nicolajpedersen.raidaid.Data.Membership;
 import dk.nicolajpedersen.raidaid.Data.Profile;
+import dk.nicolajpedersen.raidaid.Dialogs.DialogLeaveClan;
+import dk.nicolajpedersen.raidaid.Dialogs.DialogPromoteMember;
 import dk.nicolajpedersen.raidaid.Logic.HTTPLogic;
 import dk.nicolajpedersen.raidaid.Logic.ShoutArrayAdapter;
 import dk.nicolajpedersen.raidaid.R;
@@ -85,10 +90,6 @@ public class ClanPageActivity extends ActionBarActivity implements View.OnClickL
                 return false;
             }
         });
-
-
-
-
 
         tvMemberCloud = (TextView) findViewById(R.id.tvClanMembers);
         tvMemberCloud.setText(Html.fromHtml(fillCloud()));
@@ -215,11 +216,17 @@ public class ClanPageActivity extends ActionBarActivity implements View.OnClickL
                 break;
             case R.id.menu_leaveClan:
                 leaveClan();
+            case R.id.menu_closeClan:
+                closeClan();
+            case R.id.menu_giveAdmin:
+                giveAdmin();
             default:
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
 
     @Override
@@ -238,11 +245,34 @@ public class ClanPageActivity extends ActionBarActivity implements View.OnClickL
             menu.findItem(R.id.menu_kickPlayer).setEnabled(false);
             System.out.println("menu_kickPlayer shound be black");
         }
+        if(!(myRank ==6)){
+            menu.findItem(R.id.menu_closeClan).setVisible(false);
+            menu.findItem(R.id.menu_giveAdmin).setVisible(false);
+        }
 
         return super.onPrepareOptionsMenu(menu);
     }
 
+    private void giveAdmin() {
+
+    }
+
+    private void closeClan() {
+
+    }
+
     private void leaveClan() {
+        if(!(myRank == 6)){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            DialogLeaveClan leaveClanDialog = new DialogLeaveClan();
+            leaveClanDialog.setClanID(clan.getClanID());
+            leaveClanDialog.show(fragmentManager, "Leave Clan");
+
+        }else{
+            Toast toast = Toast.makeText(getApplicationContext()
+                    ,"You must hand over admin rights",Toast.LENGTH_SHORT);
+            toast.show();
+        }
         // are you sure diaolog ?
     }
 
@@ -256,6 +286,11 @@ public class ClanPageActivity extends ActionBarActivity implements View.OnClickL
     }
 
     private void startPromotePlayer() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        DialogPromoteMember leaveClanDialog = new DialogPromoteMember();
+        leaveClanDialog.setClan(clan);
+        leaveClanDialog.show(fragmentManager, "Promote Player");
+
 
     }
 
@@ -273,11 +308,12 @@ public class ClanPageActivity extends ActionBarActivity implements View.OnClickL
         if(v == btnInvite){
             // Open dialog box for invite text
         }else if(v == btnShout){
-            httpLogic.sendShout(clan.getClanID(), etShout.getText().toString());
-            clan.addShoutToWall(etShout.getText().toString());
-            sAA.notifyDataSetChanged();
-            etShout.setText("");
-
+            if(!etShout.getText().toString().contentEquals("")){
+                httpLogic.sendShout(clan.getClanID(), etShout.getText().toString());
+                clan.addShoutToWall(etShout.getText().toString());
+                sAA.notifyDataSetChanged();
+                etShout.setText("");
+            }
         }
 
     }

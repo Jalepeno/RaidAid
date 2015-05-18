@@ -39,8 +39,6 @@ public class Profile {
         this.myAppointments = myAppointments;
     }
 
-
-
     public String getUsername() {
         return username;
     }

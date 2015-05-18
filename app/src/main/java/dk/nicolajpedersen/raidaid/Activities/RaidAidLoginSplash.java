@@ -44,7 +44,7 @@ public class RaidAidLoginSplash extends Activity{
         password = loginCredentials.getString("Password");
         System.out.println("login username is: "+username);
         System.out.println("login password is: " + password);
-//        final int success = HTTPLogic.getProfileByLogin(username,password,this);
+//        success = HTTPLogic.getProfileByLogin(username,password,this);
         success = HTTPLogic.getDummyProfile(username,password,this);
 
         IntentLauncher launcher = new IntentLauncher();

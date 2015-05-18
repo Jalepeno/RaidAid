@@ -90,8 +90,8 @@ public class HTTPLogic {
                         isSuccess[0] = 1;
 
                         // start getting extra information once login has been confirmed.
-                        getClansByLogin( username, password);
-                        getFriendsByLogin( username, password);
+                        getClansByLogin(username, password);
+                        getFriendsByLogin(username, password);
 
                     }
                 }
@@ -141,6 +141,7 @@ public class HTTPLogic {
                         System.out.println(c.getClanName());
                     }
                 }
+
                 @Override
                 public void onFailure(int statusCode,
                                       Header[] headers,
@@ -223,6 +224,10 @@ public class HTTPLogic {
     }
 
     public int postSignup() {
+        return 1;
+    }
+
+    public static int leaveClan(UUID clanID) {
         return 1;
     }
 
@@ -419,5 +424,9 @@ public class HTTPLogic {
     }
 
 
+    public static int promoteMember(UUID clanID, UUID userID, int newRank) {
+
+        return 1;
+    }
 }
 
